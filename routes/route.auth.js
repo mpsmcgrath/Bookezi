@@ -122,7 +122,7 @@ var upload   = multer({
 
 
     // =====================================
-    // PROFILE SECTION =====================
+    // DASHBOARD SECTION =====================
     // =====================================
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
@@ -154,37 +154,13 @@ var upload   = multer({
         });
     });
 
-// =============================================================================
-// AUTHENTICATE (FIRST LOGIN) ==================================================
-// =============================================================================
-    // =====================================
-    // FACEBOOK ROUTES =====================
-    // =====================================
-    // route for facebook authentication and login
-    app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
-
-    // handle the callback after facebook has authenticated the user
-    app.get('/auth/facebook/callback',
-        passport.authenticate('facebook', {
-            successRedirect : '/createprofile',
-            failureRedirect : '/signup'
-        }));
 
 
- // =====================================
-    // GOOGLE ROUTES =======================
-    // =====================================
-    // send to google to do the authentication
-    // profile gets us their basic information including their name
-    // email gets their emails
-    app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
 
-    // the callback after google has authenticated the user
-    app.get('/auth/google/callback',
-            passport.authenticate('google', {
-                    successRedirect : '/createprofile',
-                    failureRedirect : '/signup'
-            }));
+
+
+
+
 
 // =============================================================================
 // AUTHORIZE (ALREADY LOGGED IN / CONNECTING OTHER SOCIAL ACCOUNT) =============
@@ -207,19 +183,7 @@ var upload   = multer({
         // handle the callback after facebook has authorized the user
         app.get('/connect/facebook/callback',
             passport.authorize('facebook', {
-                successRedirect : '/profile',
-                failureRedirect : '/'
-            }));
-
-    // twitter --------------------------------
-
-        // send to twitter to do the authentication
-        app.get('/connect/twitter', passport.authorize('twitter', { scope : 'email' }));
-
-        // handle the callback after twitter has authorized the user
-        app.get('/connect/twitter/callback',
-            passport.authorize('twitter', {
-                successRedirect : '/profile',
+                successRedirect : '/dashboard',
                 failureRedirect : '/'
             }));
 
@@ -232,16 +196,51 @@ var upload   = multer({
         // the callback after google has authorized the user
         app.get('/connect/google/callback',
             passport.authorize('google', {
-                successRedirect : '/profile',
+                successRedirect : '/dashboard',
                 failureRedirect : '/'
             }));
 
-// =============================================================================
-// UNLINK ACCOUNTS =============================================================
-// =============================================================================
-// used to unlink accounts. for social accounts, just remove the token
-// for local account, remove email and password
-// user account will stay active in case they want to reconnect in the future
+
+
+ // =============================================================================
+ // AUTHENTICATE (FIRST LOGIN) ==================================================
+ // =============================================================================
+     // =====================================
+     // FACEBOOK ROUTES =====================
+     // =====================================
+     // route for facebook authentication and login
+     app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+
+     // handle the callback after facebook has authenticated the user
+     app.get('/auth/facebook/callback',
+         passport.authenticate('facebook', {
+             successRedirect : '/createprofile',
+             failureRedirect : '/signup'
+         }));
+
+
+  // =====================================
+     // GOOGLE ROUTES =======================
+     // =====================================
+     // send to google to do the authentication
+     // profile gets us their basic information including their name
+     // email gets their emails
+     app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+
+     // the callback after google has authenticated the user
+     app.get('/auth/google/callback',
+             passport.authenticate('google', {
+                     successRedirect : '/createprofile',
+                     failureRedirect : '/signup'
+             }));
+
+
+ //=============================================================================
+ //UNLINK ACCOUNTS =============================================================
+ //=============================================================================
+ //used to unlink accounts. for social accounts, just remove the token
+ //for local account, remove email and password
+ //user account will stay active in case they want to reconnect in the future
 
     // local -----------------------------------
     app.get('/unlink/local', function(req, res) {
