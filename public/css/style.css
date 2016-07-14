@@ -1,0 +1,16 @@
+body {
+  padding-top: 70px;
+}
+@media (max-width: 979px) {
+  body {
+    padding-top: 0px;
+  }
+}
+
+
+.vspacer20 {min-height: 20px;}
+.vspacer50 {min-height: 50px;}
+
+.centered-text {
+    text-align:center
+}   

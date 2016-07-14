@@ -1,0 +1,51 @@
+Setting Bitnami application password to 'RYagBX3AbbHC'
+
+//MONGO NOTES
+Initial login after first install:
+sudo mongo admin --username root --password RYagBX3AbbHC 
+sudo mongo admin --username admin --password HIMYNAME27	(admin also has root permissions but easier password)
+sudo mongo admin --username kpapp --password HIMYNAMEISSEAN62756 (Only has readWrite on keepskills db)
+
+db.createUser({user: "sean",pwd: "hiMYNAME29!!",roles:[{"role: dbOwner"}]})
+db.createUser({user: "appAdmin",pwd: "password",roles:[{ role: "readWrite", db: "config" },"clusterAdmin"]})
+
+Mongo Log
+/opt/bitnami/mongodb/log/mongodb.log
+
+
+stack > mogodb > sudo vi mongodb.conf
+While still in the editor, type i to enter insert mode. Change the value of the bind_ip. Then type :w to save and :q to exit the editor.
+
+//instance address
+ec2-52-50-169-48.eu-west-1.compute.amazonaws.com
+
+//connect to mongo
+mongodb://mcgra:HIMYNAME27@ec2-52-50-169-48.eu-west-1.compute.amazonaws.com:27017/dummy
+
+//start and log into Mongo on command line
+mongod ec2-52-208-135-152.eu-west-1.compute.amazonaws.com/admin -u mcgra -p HIMYNAME27
+
+//Restart Mongo
+sudo bash ctlscript.sh restart mongodb
+
+//DEPOLY git CLONE to Remote
+cd apps
+rm -rf keepskills
+sudo git clone https://github.com/mpsmcgrath/keepskills.git
+cd keepskills
+sudo npm install
+forever start app.js
+
+
+EJS
+With ejs you can have
+
+<% code %> 
+... which is code that is evaluated but not printed out.
+
+<%= code %>
+... which is code that is evaluated and printed out (escaped).
+
+<%- code %>
+... which is code that is evaluated and printed out (not escaped).
+

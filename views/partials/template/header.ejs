@@ -1,0 +1,45 @@
+<!-- BUTTONS for SOCIAL LOGIN
+<ul class="nav navbar-nav navbar-right">
+                    <li><a href="/auth/linkedin"><i class="fa fa-linkedin"></i></a></li>
+                    <li><a href="/auth/google"><i class="fa fa-google"></i></a></li>
+                    <li><a href="/auth/facebook"><i class="fa fa-facebook-square"></i></a></li>
+                </ul> -->
+
+<!-- start of navbar, fixed to top with a toggle button for lower resolutions.
+HTML modified from http://www.w3schools.com/bootstrap/bootstrap_navbar.asp and styled using Material UI CSS -->
+<nav class="navbar navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+
+<!--low res toggle button --> 
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+<!-- logo and keepskills name in brand font -->
+        <a href="/" class="pull-left"><img src="img/Logo_LearnSomething.png"></a>
+        <a class="navbar-brand" href="/">KeepSkills</a>    
+    </div>
+
+<!-- navbar links using lists and a dropdown class -->
+    <div class="collapse navbar-collapse" id="myNavbar">
+      
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Sections<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </li>
+        <li><a href="/howitworks">how it works</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
