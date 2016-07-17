@@ -6,85 +6,253 @@
 <body>
 
     <% include partials/template/header.ejs %>
-<div class="container">
+<body class="profile-page">
 
-    <div class="text-center">
-        <h1><span class="fa fa-anchor"></span> Profile Page</h1>
-        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-    </div>
+    <div class="page-header header-filter" data-parallax="active" style="background-image: url('../img/examples/city.jpg');"></div>
 
-    <div class="row">
-<h1>Link Your Social Accounts</h1>
-        <!-- LOCAL INFORMATION -->
-        <div class="col-sm-6">
-            <div class="well">
-                <h3><span class="fa fa-user"></span> Local</h3>
+    <div class="main main-raised">
+        <div class="profile-content">
+            <div class="container">
 
-                <% if (user.local.email) { %>
-                    <p>
-                        <strong>id</strong>: <%= user._id %><br>
-                        <strong>email</strong>: <%= user.local.email %><br>
-                        <strong>password</strong>: <%= user.local.password %>
-                    </p>
-                    
-                    <a href="/unlink/local" class="btn btn-default">Unlink</a>
-                <% } else { %>
-                    <a href="/connect" class="btn btn-default">Connect Local</a>
-                <% } %>
+                <div class="row">
+                    <div class="col-xs-6 col-xs-offset-3">
+                       <div class="profile">
+                            <div class="avatar">
+                                <img src="/img/profile_pics/<%= user.avatarName %> " alt="Circle Image" class="img-circle img-responsive img-raised">
+                            </div>
+                            <div class="name">
+                                <h3 class="title"><%= user.firstName %></h3>
+                                <h6><% user.subjectName %></h6>
+                                <a href="#pablo" class="btn btn-just-icon btn-simple btn-dribbble"><i class="fa fa-dribbble"></i></a>
+                                <a href="#pablo" class="btn btn-just-icon btn-simple btn-twitter"><i class="fa fa-twitter"></i></a>
+                                <a href="#pablo" class="btn btn-just-icon btn-simple btn-pinterest"><i class="fa fa-pinterest"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-2 follow">
+                       <button class="btn btn-fab btn-primary" rel="tooltip" title="Follow this user">
+                            <i class="material-icons">add</i>
+                        </button>
+                    </div>
+                </div>
 
+
+                <div class="description text-center">
+                    <p><%- user.biography %></p>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="profile-tabs">
+                            <div class="nav-align-center">
+                                <ul class="nav nav-pills nav-pills-icons" role="tablist">
+                                    <li class="active">
+                                        <a href="#work" role="tab" data-toggle="tab">
+                                            <i class="material-icons">palette</i>
+                                            Work
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#connections" role="tab" data-toggle="tab">
+                                            <i class="material-icons">people</i>
+                                            Connections
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#media" role="tab" data-toggle="tab">
+                                            <i class="material-icons">camera</i>
+                                            Media
+                                        </a>
+                                    </li>
+                                </ul>
+
+
+                            </div>
+                        </div>
+                        <!-- End Profile Tabs -->
+                    </div>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane active work" id="work">
+                        <div class="row">
+                            <div class="col-md-7 col-md-offset-1">
+                                <h4 class="title">Latest Collections</h4>
+                                <div class="row collections">
+                                    <div class="col-md-6">
+                                        <div class="card card-background" style="background-image: url('../img/examples/chris4.jpg')">
+                                            <a href="#pablo"></a>
+                                            <div class="content">
+                                                <label class="label label-primary">Spring 2016</label>
+                                                <a href="#pablo">
+                                                    <h2 class="card-title">Stilleto</h2>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card card-background" style="background-image: url('../img/examples/chris6.jpg')">
+                                            <a href="#pablo"></a>
+                                            <div class="content">
+                                                <label class="label label-primary">Spring 2016</label>
+                                                <a href="#pablo">
+                                                    <h2 class="card-title">High Heels</h2>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card card-background" style="background-image: url('../img/examples/chris5.jpg')">
+                                            <a href="#pablo"></a>
+                                            <div class="content">
+                                                <label class="label label-primary">Summer 2016</label>
+                                                <a href="#pablo">
+                                                    <h2 class="card-title">Flats</h2>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card card-background" style="background-image: url('../img/examples/chris1.jpg')">
+                                            <a href="#pablo"></a>
+                                            <div class="content">
+                                                <label class="label label-primary">Winter 2015</label>
+                                                <a href="#pablo">
+                                                    <h2 class="card-title">Men's Sneakers</h2>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-md-offset-1 stats">
+                                <h4 class="title">Stats</h4>
+                                <ul class="list-unstyled">
+                                    <li><b>60</b> Products</li>
+                                    <li><b>4</b> Collections</li>
+                                    <li><b>331</b> Influencers</li>
+                                    <li><b>1.2K</b> Likes</li>
+                                </ul>
+                                <hr />
+                                <h4 class="title">About my Sessions</h4>
+                                <p class="description"><%- user.lessonDescription %></p>
+                                <hr />
+                                <h4 class="title">Focus</h4>
+                                <span class="label label-primary">Footwear</span>
+                                <span class="label label-rose">Luxury</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane connections" id="connections">
+                        <div class="row">
+                            <div class="col-md-5 col-md-offset-1">
+                                <div class="card card-profile card-plain">
+                                    <div class="col-md-5">
+                                        <div class="card-image">
+                                            <a href="#pablo">
+                                                <img class="img" src="../img/faces/avatar.jpg" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="content">
+                                            <h4 class="card-title">Gigi Hadid</h4>
+                                            <h6 class="category text-muted">Model</h6>
+
+                                            <p class="card-description">
+                                                Don't be scared of the truth because we need to restart the human foundation in truth...
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-5">
+                                <div class="card card-profile card-plain">
+                                    <div class="col-md-5">
+                                        <div class="card-image">
+                                            <a href="#pablo">
+                                                <img class="img" src="../img/faces/marc.jpg" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="content">
+                                            <h4 class="card-title">Marc Jacobs</h4>
+                                            <h6 class="category text-muted">Designer</h6>
+
+                                            <p class="card-description">
+                                                Don't be scared of the truth because we need to restart the human foundation in truth...
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 col-md-offset-1">
+                                <div class="card card-profile card-plain">
+                                    <div class="col-md-5">
+                                        <div class="card-image">
+                                            <a href="#pablo">
+                                                <img class="img" src="../img/faces/kendall.jpg" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="content">
+                                            <h4 class="card-title">Kendall Jenner</h4>
+                                            <h6 class="category text-muted">Model</h6>
+
+                                            <p class="card-description">
+                                                I love you like Kanye loves Kanye. Don't be scared of the truth.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-5">
+                                <div class="card card-profile card-plain">
+                                    <div class="col-md-5">
+                                        <div class="card-image">
+                                            <a href="#pablo">
+                                                <img class="img" src="../img/faces/card-profile2-square.jpg" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="content">
+                                            <h4 class="card-title">George West</h4>
+                                            <h6 class="category text-muted">Model/DJ</h6>
+
+                                            <p class="card-description">
+                                                I love you like Kanye loves Kanye.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="tab-pane text-center gallery" id="media">
+                        <div class="row">
+                            <div class="col-md-3 col-md-offset-3">
+                                <img src="../img/examples/chris4.jpg" class="img-rounded" />
+                                <img src="../img/examples/chris6.jpg" class="img-rounded" />
+                            </div>
+                            <div class="col-md-3">
+                                <img src="../img/examples/chris7.jpg" class="img-rounded" />
+                                <img src="../img/examples/chris5.jpg" class="img-rounded" />
+                                <img src="../img/examples/chris9.jpg" class="img-rounded" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <!-- FACEBOOK INFORMATION -->
-        <div class="col-sm-6">
-            <div class="well">
-                <h3 class="text-primary"><span class="fa fa-facebook"></span> Facebook</h3>
-
-                <!-- check if the user has this token (is the user authenticated with this social account) -->
-                <% if (user.facebook.token) { %>
-                    <p>
-                        <strong>id</strong>: <%= user.facebook.id %><br>
-                        <strong>token</strong>: <%= user.facebook.token %><br>
-                        <strong>email</strong>: <%= user.facebook.email %><br>
-                        <strong>name</strong>: <%= user.facebook.name %><br>
-                    </p>
-
-                    <a href="/unlink/facebook" class="btn btn-primary">Unlink</a>
-                <% } else { %>
-                    <a href="/connect/facebook" class="btn btn-primary">Connect Facebook</a>
-                <% } %>
-
-            </div>
-        </div>
     </div>
 
-    <div class="row">
-
-        <!-- GOOGLE INFORMATION -->
-        <div class="col-sm-6">
-            <div class="well">
-                <h3 class="text-danger"><span class="fa fa-google-plus"></span> Google+</h3>
-
-                <!-- check if the user has this token (is the user authenticated with this social account) -->
-                <% if (user.google.token) { %>
-                    <p>
-                        <strong>id</strong>: <%= user.google.id %><br>
-                        <strong>token</strong>: <%= user.google.token %><br>
-                        <strong>email</strong>: <%= user.google.email %><br>
-                        <strong>name</strong>: <%= user.google.name %>
-                    </p>
-
-                    <a href="/unlink/google" class="btn btn-danger">Unlink</a>
-                <% } else { %>
-                    <a href="/connect/google" class="btn btn-danger">Connect Google</a>
-                <% } %>
-
-            </div>
-        </div>
-    </div>
-<div class="vspacer50"></div>
-<div class="vspacer50"></div>
-</div>
     <% include partials/template/footer.ejs %>
     <% include partials/template/jsdefaults.ejs %>
 </body>

@@ -1,5 +1,6 @@
 var multer      = require('multer')
-
+var ext = '';
+var profilePicDate = '';
 
 // app/routes.js
 module.exports = function(app, passport) {
@@ -26,7 +27,7 @@ app.get('/', function(req, res, next) {
 
     // process the login form
     app.post('/login', passport.authenticate('local-login', {
-        successRedirect : '/dashboard', // redirect to the secure profile section
+        successRedirect : '/profile', // redirect to the secure profile section
         failureRedirect : '/login', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
     }));
@@ -73,13 +74,13 @@ var storage = multer.diskStorage({
   filename: function (req, file, cb) {
 
 //custom code to add extension to uploaded profile image png or jpg or jpeg
-    var ext = '';
+    ext = '';
     if(file.mimetype == 'image/png'){
         ext = '.png'
     } else if (file.mimetype == 'image/jpg' || file.mimetype == 'image/jpeg' ){
         ext = '.jpg'}
-
-    cb(null, 'profiler' + Date.now() + ext)
+    profilePicDate = Date.now();
+    cb(null, 'profiler' + profilePicDate + ext)
         }})
 
 var upload   = multer({ 
@@ -89,11 +90,10 @@ var upload   = multer({
 
     app.post('/createprofile', upload.single("image"), isLoggedIn, function(req, res) {
  
-
-           var file = req.file;
-           console.log(file.filename);     
+           console.log(req.body); 
+           var file = req.file;    
            var user     = req.user;
-           user.avatarName = file.filename;
+           user.avatarName = 'profiler'+profilePicDate+ext; 
            user.subjectName = req.body.subjectName;
            user.canSessionLength30 = req.body.canSessionLength30;
            user.canSessionLength60 = req.body.canSessionLength60;
@@ -113,7 +113,7 @@ var upload   = multer({
            user.dob = req.body.dob;
            user.biography = req.body.biography;
            user.lessonDescription = req.body.lessonDescription; 
-                                                
+           console.log(user); 
            message: req.flash('signupMessage'),
            user.save(function(err) {
            res.redirect('/dashboard');
@@ -127,8 +127,12 @@ var upload   = multer({
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
     app.get('/profile', isLoggedIn, function(req, res) {
+                console.log('************req.user************************************************')
+                console.log(req.user)
+                console.log('********************************************************************')
+                            
         res.render('profile.ejs', {
-            user : req.user // get the user out of session and pass to template
+            user : req.user, // get the user out of session and pass to template
         });
     });
 
@@ -146,6 +150,9 @@ var upload   = multer({
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
     app.get('/dashboard', isLoggedIn, function(req, res) {
+            console.log(req.user),
+            console.log('---------'),
+            console.log(req.session),
         res.render('dashboard.ejs', {
             user : req.user, // get the user out of session and pass to template
             message: req.flash('signupMessage'),
@@ -159,7 +166,36 @@ var upload   = multer({
 
 
 
+ // =============================================================================
+ // AUTHENTICATE (FIRST LOGIN) ==================================================
+ // =============================================================================
+     // =====================================
+     // FACEBOOK ROUTES =====================
+     // =====================================
+     // route for facebook authentication and login
+     app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
 
+     // handle the callback after facebook has authenticated the user
+     app.get('/auth/facebook/callback',
+         passport.authenticate('facebook', {
+             successRedirect : '/createprofile',
+             failureRedirect : '/signup'
+         }));
+
+  // =====================================
+     // GOOGLE ROUTES =======================
+     // =====================================
+     // send to google to do the authentication
+     // profile gets us their basic information including their name
+     // email gets their emails
+     app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+
+     // the callback after google has authenticated the user
+     app.get('/auth/google/callback',
+             passport.authenticate('google', {
+                     successRedirect : '/createprofile',
+                     failureRedirect : '/signup'
+             }));
 
 
 // =============================================================================
@@ -202,37 +238,8 @@ var upload   = multer({
 
 
 
- // =============================================================================
- // AUTHENTICATE (FIRST LOGIN) ==================================================
- // =============================================================================
-     // =====================================
-     // FACEBOOK ROUTES =====================
-     // =====================================
-     // route for facebook authentication and login
-     app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
-
-     // handle the callback after facebook has authenticated the user
-     app.get('/auth/facebook/callback',
-         passport.authenticate('facebook', {
-             successRedirect : '/createprofile',
-             failureRedirect : '/signup'
-         }));
 
 
-  // =====================================
-     // GOOGLE ROUTES =======================
-     // =====================================
-     // send to google to do the authentication
-     // profile gets us their basic information including their name
-     // email gets their emails
-     app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
-
-     // the callback after google has authenticated the user
-     app.get('/auth/google/callback',
-             passport.authenticate('google', {
-                     successRedirect : '/createprofile',
-                     failureRedirect : '/signup'
-             }));
 
 
  //=============================================================================
