@@ -1,7 +1,11 @@
+// Load mongoose to handle the model, bcrypt to encrypt our cookie/password encryption, load schema object
 var mongoose = require('mongoose');  
 var bcrypt   = require('bcrypt-nodejs');
 var Schema = mongoose.Schema;
 
+// our user model, this can been morphing since the beginning of development, 
+// it's pretty self explanatory! I have used clear field names where I can. 
+// the local, facebook and google embedded lists are used by PassportJS auth module
 var UserSchema = new Schema({ 
   firstName: String,
   lastName: String,
@@ -46,15 +50,15 @@ var UserSchema = new Schema({
 });
 
 // methods ======================
-// generating a hash
+// Use bcrypt to generate a hash
 UserSchema.methods.generateHash = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
 
-// checking if password is valid
+// check if the password is valid
 UserSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.local.password);
 };
 
-// create the model for users and expose it to our app
+// Create the model for users and expose it to our app
 module.exports = mongoose.model('User', UserSchema);

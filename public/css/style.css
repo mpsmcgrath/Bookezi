@@ -12,5 +12,9 @@ body {
 .vspacer50 {min-height: 50px;}
 
 .centered-text {
-    text-align:center
+    text-align:center;
 }   
+
+.alert {
+	margin-bottom: 0px;
+}

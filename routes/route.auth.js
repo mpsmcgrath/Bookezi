@@ -1,31 +1,34 @@
+// requiring multer for file uploads from the user - in this case for profile pics
 var multer      = require('multer')
+// these are used for adding a date and the correct extention to uploaded profile pics
 var ext = '';
 var profilePicDate = '';
 
-// app/routes.js
+// All protected routes are wrapped in a function which is passed app and passport (PassportJS)
 module.exports = function(app, passport) {
 
-/* GET home page. */
-app.get('/', function(req, res, next) {
-  res.render('index', { 
-    title: 'Home', 
-  });
+// GET home page.
+app.get('/', function(req, res) {
+    title: 'Home'
+    res.render('index', { 
+        expressFlash: req.flash('success'), 
+    });
 });
 
     // =====================================
     // LOGIN ===============================
     // =====================================
-    // show the login form
+    // GET the login form
     app.get('/login', function(req, res) {
-        // render the page and pass in any flash data if it exists
+        
+    // render the page and pass in any flash data if it exists
         res.render('login.ejs', { 
             title: 'Login',
             message: req.flash('loginMessage'),  
         }); 
     });
 
-
-    // process the login form
+    // POST the login form
     app.post('/login', passport.authenticate('local-login', {
         successRedirect : '/profile', // redirect to the secure profile section
         failureRedirect : '/login', // redirect back to the signup page if there is an error
@@ -37,7 +40,7 @@ app.get('/', function(req, res, next) {
     // =====================================
     // SIGNUP ==============================
     // =====================================
-    // show the signup form
+    // GET the signup form
     app.get('/signup', function(req, res) {
         res.render('signup.ejs', { 
             title: 'Signup',
@@ -45,15 +48,17 @@ app.get('/', function(req, res, next) {
         });
     });
 
-    // process the signup form
+    // POST the signup form
      app.post('/signup', passport.authenticate('local-signup', {
         successRedirect : '/createprofile', // redirect to the secure profile creation section
         failureRedirect : '/signup', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
     }));
 
+
+
     // =====================================
-    // CREATE PROFILE GET======================
+    // CREATE PROFILE ======================
     // =====================================
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
@@ -66,30 +71,39 @@ app.get('/', function(req, res, next) {
     });
 
 
+    // =====================================
+    // PROFILE PIC UPLOAD ==================
+    // =====================================
+// Use multer to create storage object using diskStorage function.   
 var storage = multer.diskStorage({
+    // Public destination for our profile pics
   destination: function (req, file, cb) {
     cb(null, 'public/img/profile_pics/')
     },
-
+    // Each file name needs to be unique 
   filename: function (req, file, cb) {
 
-//custom code to add extension to uploaded profile image png or jpg or jpeg
+// Custom code to add extension to uploaded profile image png or jpg or jpeg
     ext = '';
     if(file.mimetype == 'image/png'){
         ext = '.png'
     } else if (file.mimetype == 'image/jpg' || file.mimetype == 'image/jpeg' ){
         ext = '.jpg'}
+        // Generate a date and add the date and correct extension to the file
     profilePicDate = Date.now();
     cb(null, 'profiler' + profilePicDate + ext)
         }})
-
+// Limit on file size for security - in case someone sends a vast file and crashes the app
 var upload   = multer({ 
     limits: {fileSize: 5000000, files:1},
     storage: storage
  })
 
+// POST the createprofile form, including upload the image, check if logged in
     app.post('/createprofile', upload.single("image"), isLoggedIn, function(req, res) {
  
+ //bodyparser will store everything in req.body and here we pass it to our user session
+ //the save to our database user.save() and redirect to dashboard
            console.log(req.body); 
            var file = req.file;    
            var user     = req.user;
@@ -122,7 +136,7 @@ var upload   = multer({
 
 
     // =====================================
-    // DASHBOARD SECTION =====================
+    // PROFILE SECTION =====================
     // =====================================
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
@@ -145,7 +159,7 @@ var upload   = multer({
     });
 
     // =====================================
-    // DASHBOARD SECTION =====================
+    // DASHBOARD SECTION ===================
     // =====================================
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
@@ -203,17 +217,18 @@ var upload   = multer({
 // =============================================================================
 
     // locally --------------------------------
+
         app.get('/connect', function(req, res) {
             res.render('connect-local.ejs', { message: req.flash('loginMessage') });
         });
         app.post('/connect', passport.authenticate('local-signup', {
-            successRedirect : '/profile', // redirect to the secure profile section
-            failureRedirect : '/connect', // redirect back to the signup page if there is an error
+            successRedirect : '/dashboard', // redirect to the secure profile section
+            failureRedirect : '/SIGNUP', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
         }));
 
-    // facebook 
-        // send to facebook to do the authentication
+    // facebook --------------------------------
+
         app.get('/connect/facebook', passport.authorize('facebook', { scope : 'email' }));
 
         // handle the callback after facebook has authorized the user
@@ -226,7 +241,6 @@ var upload   = multer({
 
     // google ---------------------------------
 
-        // send to google to do the authentication
         app.get('/connect/google', passport.authorize('google', { scope : ['profile', 'email'] }));
 
         // the callback after google has authorized the user
@@ -235,11 +249,6 @@ var upload   = multer({
                 successRedirect : '/dashboard',
                 failureRedirect : '/'
             }));
-
-
-
-
-
 
 
  //=============================================================================
@@ -293,4 +302,6 @@ function isLoggedIn(req, res, next) {
         return next();
 
     res.redirect('/login');
-}}
+}
+
+}

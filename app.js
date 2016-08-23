@@ -1,20 +1,55 @@
+//Welcome to our FYP.  This code has been extensively commented throughout for readability. 
+//The majority has been lifted and modified from various sources such as github/npm as is standard for 
+// node-express projects
+
+//This loads the .env config file, that has process.env variables for dev and prod
 require('dotenv').config(); 
-var flash       = require('connect-flash');
+
+//connect flash allows the sending of success, info, warning, error messages to the UI
+var flash = require('express-flash');
+
+//loads the express app
 var express     = require('express');
+
+//loads passport for authentication
 var passport    = require('passport');
+
+//init the express app
 var app         = express();
+
+//Allows us to set our port to the env variable PORT
 var port        = process.env.PORT || 8080; // set our port
+
+//load mongoose to handle our models
 var mongoose    = require('mongoose');
-var morgan      = require('morgan');
+
+//handling cookies funnily enough!
 var cookieParser = require('cookie-parser');
+
+//This allows the use of the request body, for URL encoded data, JSON, etc.
 var bodyParser  = require('body-parser');
+
+//Handles the session - passportjs wraps and extends this
 var session     = require('express-session');
-var db          = require('./models/db');
+
+//our connenction to our db, stored in config
+var db          = require('./config/config.db');
+
+//for working with file and directory paths
 var path        = require('path');
+
+//for serving the little favicon
 var favicon     = require('serve-favicon');
-var logger      = require('morgan');
+
+//morgan for logging
+var morgan      = require('morgan');
+
+//requires our user model
 var User        = require('./models/model.users')
-var routes      = require('./routes/index');
+
+//requires our user model
+var AddEmail        = require('./models/model.addemail')
+
 
 //Nodemailer
 var nodemailer  = require('nodemailer');
@@ -26,11 +61,13 @@ var nodemailerMailgun = nodemailer.createTransport(mg(auth));
 
 
 
-// view engine setup
+// view engine setup, this is in the PATH+views directory.  View engine in use is EJS
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-//set up express application
+
+//These are how we use some of the modules reqired above (location of favicon, use morgan only in dev
+//mode, enables bodyparsing and cookie parsing, set the public path where our client visible files are.)
 app.use(favicon(path.join(__dirname,'public','img','favicon.ico')));
 app.use(morgan('dev'));
 app.use(bodyParser.json());
@@ -39,28 +76,19 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-//required for passport
-app.use(session({ secret: 'verysecuresecret' }));
+//required for passport to be secure, send flash messages, ititiate and start session
+app.use(session({ secret: 'verysecuresecret', cookie: { maxAge: 600000 }}));
 app.use(flash()); 
 app.use(passport.initialize());
 app.use(passport.session()); 
 
-require('./routes/route.auth.js')(app, passport);
-require('./config/passport')(passport);
+//These are making our outter and authorised routes available as well as loading the PassportJS strategies
+require('./routes/route.index')(app, express);
+require('./routes/route.auth')(app, passport);
+require('./config/config.passport')(passport);
 
-//start the server and listen on port described above
-app.listen(port);
-console.log('Magic happens on port ' + port);
-
+//global variable for web page title
 app.locals.pagetitle = " - KeepSkills.com";
-
-
-app.use('/', routes);
-app.use('/about', routes);
-app.use('/contact', routes);
-app.use('/login', routes);
-app.use('/signup', routes);
-app.use('/api', routes);
 
 
 // catch 404 and forward to error handler
