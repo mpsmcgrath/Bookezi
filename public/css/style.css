@@ -10,6 +10,7 @@ body {
 
 .vspacer20 {min-height: 20px;}
 .vspacer50 {min-height: 50px;}
+.vspacer50 {min-height: 100px;}
 
 .centered-text {
     text-align:center;
@@ -17,4 +18,10 @@ body {
 
 .alert {
 	margin-bottom: 0px;
+}
+
+#create_profile_buttons {
+
+	  
+text-align:center;
 }

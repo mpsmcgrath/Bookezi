@@ -1,9 +1,10 @@
 var AddEmail    = require('../models/model.addemail')
+var User    = require('../models/model.users')
+var Bookings    = require('../models/model.bookings')
 
 //Nodemailer for the contact form
 var nodemailer  = require('nodemailer');
 var mg          = require('nodemailer-mailgun-transport');
-
 // API key from mailgun.com/cp (free 10K of monthly emails) - used with Nodemailer
 var auth        = {auth: {api_key: 'key-fa1d0fc3a46d962e53f041917ccea81b',domain: 'mail.keepskills.com'}}
 var nodemailerMailgun = nodemailer.createTransport(mg(auth));
@@ -29,7 +30,16 @@ app.get('/about', function(req, res, next) {
 // GET contact page.
 app.get('/contact', function(req, res) {
   res.render('contact', { 
-    title: 'Contact',  
+    title: 'Contact',
+    expressFlash: req.flash('success')  
+  });
+});
+
+// GET t&cs page.
+app.get('/termsandconditions', function(req, res) {
+  res.render('termsandconditions', { 
+    title: 'Terms and Conditions',
+    expressFlash: req.flash('success')  
   });
 });
 
@@ -43,7 +53,6 @@ app.get('/howitworks', function(req, res) {
 //Submit contact form
 app.post('/contactformsend', function(req, res){
   console.log('contact form send');
-  res.json({ message: 'contact form send'})
 
 nodemailerMailgun.sendMail({
   from: req.body.email,
@@ -62,7 +71,9 @@ nodemailerMailgun.sendMail({
     console.log('Response: ' + info);
   }
 }); 
-
+      //These two lines are express-flash sending a success message back to the refreshed homepage
+      req.flash('success', 'Thank you for your message! '+req.body.name+' we will be in touch shortly');
+      res.redirect(301, '/contact');
 });
 
 
@@ -108,9 +119,19 @@ nodemailerMailgun.sendMail({
           })
   });
 
+app.post('/api/availability', function(req, res){
+  
+  availability = req.body;
 
-//API Routes
+        var booking = new Bookings();      // create a new instance of the User model
+        booking.availability = availability;  // set the availability equal to our array of JSON objects (start/end/day of week)
+        booking.save(function(err) {
+            if (err)
+                res.send(err);
 
+ res.send('success'+req.body);
+});
+});
 app.post('/api/users', function(req, res, next) {
         
         var user = new User();      // create a new instance of the User model

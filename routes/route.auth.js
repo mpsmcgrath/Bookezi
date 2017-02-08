@@ -1,3 +1,9 @@
+//Nodemailer for the contact form
+var nodemailer  = require('nodemailer');
+var mg          = require('nodemailer-mailgun-transport');
+// API key from mailgun.com/cp (free 10K of monthly emails) - used with Nodemailer
+var auth        = {auth: {api_key: 'key-fa1d0fc3a46d962e53f041917ccea81b',domain: 'mail.keepskills.com'}}
+var nodemailerMailgun = nodemailer.createTransport(mg(auth));
 // requiring multer for file uploads from the user - in this case for profile pics
 var multer      = require('multer')
 // these are used for adding a date and the correct extention to uploaded profile pics
@@ -68,6 +74,9 @@ app.get('/', function(req, res) {
             message: req.flash('signupMessage'),
             title: 'Create Profile'
         });
+
+
+
     });
 
 
@@ -88,7 +97,9 @@ var storage = multer.diskStorage({
     if(file.mimetype == 'image/png'){
         ext = '.png'
     } else if (file.mimetype == 'image/jpg' || file.mimetype == 'image/jpeg' ){
-        ext = '.jpg'}
+        ext = '.jpg'
+    }
+
         // Generate a date and add the date and correct extension to the file
     profilePicDate = Date.now();
     cb(null, 'profiler' + profilePicDate + ext)
@@ -99,11 +110,17 @@ var upload   = multer({
     storage: storage
  })
 
+    // =====================================
+    // CREATE PROFILE FORM =================
+    // =====================================
 // POST the createprofile form, including upload the image, check if logged in
+
+    var storedEvents = []
+
     app.post('/createprofile', upload.single("image"), isLoggedIn, function(req, res) {
  
  //bodyparser will store everything in req.body and here we pass it to our user session
- //the save to our database user.save() and redirect to dashboard
+ //then save to our database user.save() and redirect to dashboard
            console.log(req.body); 
            var file = req.file;    
            var user     = req.user;
@@ -117,6 +134,7 @@ var upload   = multer({
            user.canTeachAtHome = req.body.canTeachAtHome;
            user.canTeachAtCustHome = req.body.canTeachAtCustHome;           
            user.canTeachAtCustom = req.body.canTeachAtCustom;
+           user.title = req.body.title;
            user.firstName = req.body.firstName;
            user.lastName = req.body.lastName;
            user.address1 = req.body.address1;
@@ -125,14 +143,35 @@ var upload   = multer({
            user.county = req.body.county;
            user.postcode = req.body.postcode;
            user.dob = req.body.dob;
+           if (user.local.email) {user.email = user.local.email } else if (user.facebook.email) { user.email = user.facebook.email} else if (user.google.email) { user.email = user.google.email};
            user.biography = req.body.biography;
            user.lessonDescription = req.body.lessonDescription; 
            console.log(user); 
            message: req.flash('signupMessage'),
-           user.save(function(err) {
-           res.redirect('/dashboard');
-        });
-    });
+           user.save(function(err) { if (err) { res.redirect('/createprofile'); }});
+        
+
+// Send user welcome email 
+nodemailerMailgun.sendMail({
+  from: 'signup@KeepSkills.com',
+  to: user.email, // An array if you have multiple recipients.
+  subject: 'Welcome to KeepSkills ' + user.firstName,
+  'h:Reply-To': 'sean@keepskills.com',
+  //HTML email content can be sent straight from the message variable
+  //html: req.body.message,
+  //You can use plain "text:" either
+    text: 'Congratulations on setting up the welcome email' 
+}, function (err, info) {
+  if (err) {
+    console.log('Error: ' + err);
+  }
+  else {
+    console.log('Response: ' + info);
+  }
+}); //end of send user email
+
+            res.redirect('/dashboard');
+    }); //end of app.post('createprofile')
 
 
     // =====================================

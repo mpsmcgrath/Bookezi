@@ -3563,8 +3563,8 @@ h2.title {
 .card-background .content {
   position: relative;
   z-index: 2;
-  min-height: 280px;
-  padding-top: 40px;
+  min-height: 200px;
+  padding-top: 100px;
   padding-bottom: 40px;
   max-width: 440px;
   margin: 0 auto;
@@ -5002,6 +5002,10 @@ select[data-dropdownjs][disabled] + .dropdownjs > input[readonly] {
   margin-bottom: 50px;
 }
 
+.testimonials-3 {
+  background-color: #FFFFFF;
+}
+
 .contactus-1 .info {
   padding: 0;
   margin: 0;
@@ -5231,7 +5235,7 @@ footer .pull-center {
   left: 0;
   top: 0;
   content: "";
-  background-color: rgba(0, 0, 0, 0.66);
+  background-color: #3d3d3d;
 }
 .subscribe-line.subscribe-line-image .container {
   z-index: 2;
@@ -6088,14 +6092,15 @@ footer .pull-center {
 }
 
 .profile-page .page-header {
-  height: 380px;
+  height: 180px;
   background-position: top center;
 }
+
 .profile-page .profile {
   text-align: center;
 }
 .profile-page .profile img {
-  max-width: 160px;
+  max-width: 200px;
   width: 100%;
   margin: 0 auto;
   -webkit-transform: translate3d(0, -50%, 0);
@@ -6104,8 +6109,8 @@ footer .pull-center {
   -ms-transform: translate3d(0, -50%, 0);
   transform: translate3d(0, -50%, 0);
 }
-.profile-page .profile .name {
-  margin-top: -80px;
+.profile-page .sprofile .name {
+  margin-top: 100px;
 }
 .profile-page .description {
   margin: 15px auto 0;
@@ -6130,7 +6135,8 @@ footer .pull-center {
   min-width: 160px;
 }
 .profile-page .work {
-  padding: 40px 0px;
+  padding: -40px 0px;
+  margin-top: -100px;
 }
 .profile-page .work .collections {
   margin-top: 20px;
@@ -6148,6 +6154,14 @@ footer .pull-center {
 .profile-page .connections .card-profile {
   text-align: left;
 }
+
+
+
+
+
+
+
+
 
 .blog-post .section-text {
   padding-bottom: 0;

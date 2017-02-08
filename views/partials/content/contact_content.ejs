@@ -1,0 +1,113 @@
+<body class="contact-page">
+
+  
+<div id="contactUsMap" class="big-map"></div>
+
+
+  <div class="main main-raised">
+    <div class="contact-content">
+        <div class="container">
+              <h2 class="title">Send us a message</h2>
+        <div class="row">
+          <div class="col-md-6">
+            <p class="description">You can contact us with anything related to our services. We'll respond to you as soon as possible.<br><br>
+            </p>
+            
+<!--Contact form-->
+            <form role="form" id="contact-form" method="post" action="/contactformsend">
+              <div class="form-group label-floating">
+                <label class="control-label">Your name</label>
+                <input type="text" name="name" class="form-control">
+              </div>
+              <div class="form-group label-floating">
+                <label class="control-label">Email address</label>
+                <input type="email" name="email" class="form-control"/>
+              </div>
+              <div class="form-group label-floating">
+                <label class="control-label">Phone</label>
+                <input type="text" name="phone" class="form-control"/>
+              </div>
+              <div class="form-group label-floating">
+                <label class="control-label">Your message</label>
+                <textarea name="message" class="form-control" id="message" rows="6"></textarea>
+              </div>
+              <div class="submit text-center">
+                <input type="submit" class="btn btn-primary btn-raised btn-round" value="Contact Us" />
+              </div>
+            </form>
+<!-- end contact form-->
+
+          </div>
+                  <div class="col-md-4 col-md-offset-2">
+                  <div class="info info-horizontal">
+                <div class="icon icon-primary">
+                  <i class="material-icons">pin_drop</i>
+                </div>
+                <div class="description">
+                  <h4 class="info-title">Find us at the office</h4>
+                  <p> Kingston Lodge,<br>
+                      Drumcondra,<br>
+                      Dublin 3,<br>
+                      Ireland
+                  </p>
+                </div>
+                  </div>
+                        <div class="info info-horizontal">
+                <div class="icon icon-primary">
+                  <i class="material-icons">phone</i>
+                </div>
+                <div class="description">
+                  <h4 class="info-title">Give us a ring</h4>
+                    <p>083 100 20 30<br>
+                     Mon - Fri, 10:00-16:00
+                  </p>
+                </div>
+                  </div>
+                  <div class="info info-horizontal">
+                <div class="icon icon-primary">
+                  <i class="material-icons">business_center</i>
+                </div>
+                <div class="description">
+                  <h4 class="info-title">Legal Information</h4>
+                  <p> Bookezi Ltd.<br>
+                                    VAT &middot; EN2341241<br>
+                                    IBAN &middot; EN8732ENGB2300099123<br>
+                                    Bank &middot; Bank of Ireland
+                  </p>
+                </div>
+                  </div>
+            </div>
+               </div>
+            </div>
+    </div>
+    </div>
+    <div class="vspacer50"></div>
+
+
+<!-- This is the Google Maps javascript that is specific to this page and so is included here separately from jsdefault.ejs --> 
+      <script type="text/javascript">
+    $().ready(function(){
+      // the body of this function is in material-kit.js
+
+    googlemapfunction = { 
+
+      initContactUsMap: function(){
+        var myLatlng = new google.maps.LatLng(53.36344719220665, -6.255533692720974);
+        var mapOptions = {
+          zoom: 14,
+          center: myLatlng,
+          scrollwheel: false, //disables scroll over the map, it is annoying when you scroll page
+        }
+        var map = new google.maps.Map(document.getElementById("contactUsMap"), mapOptions);
+
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            title:"KeepSkills.com, Dublin Headquarters"
+        });
+        marker.setMap(map);
+    },
+}
+
+      googlemapfunction.initContactUsMap();
+    });
+  </script>

@@ -77,7 +77,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 //required for passport to be secure, send flash messages, ititiate and start session
-app.use(session({ secret: 'verysecuresecret', cookie: { maxAge: 600000 }}));
+app.use(session({ secret: 'verysecuresecret', cookie: { maxAge: 6000000 }}));
 app.use(flash()); 
 app.use(passport.initialize());
 app.use(passport.session()); 

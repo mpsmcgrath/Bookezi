@@ -28,8 +28,9 @@ $(document).ready(function(){
 
     // Activate Datepicker
     if($('.datepicker').length != 0){
-        $('.datepicker').datepicker({
-             weekStart:1
+        $('input.datepicker').datepicker({
+             viewMode: 'years',
+             format: "dd.mm.yyyy"
         });
     }
 
@@ -122,47 +123,8 @@ materialKitDemo = {
             });
         }
     }, 4),
-
-    initContactUsMap: function(){
-        var myLatlng = new google.maps.LatLng(53.36344719220665, -6.255533692720974);
-        var mapOptions = {
-          zoom: 14,
-          center: myLatlng,
-          scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
-        }
-        var map = new google.maps.Map(document.getElementById("contactUsMap"), mapOptions);
-
-        var marker = new google.maps.Marker({
-            position: myLatlng,
-            title:"KeepSkills.com, Dublin Headquarters"
-        });
-        marker.setMap(map);
-    },
-
-    initContactUs2Map: function(){
-        var lat = 53.3852;
-        var long = 6.2573;
-
-        var centerLong = long - 0.025;
-
-        var myLatlng = new google.maps.LatLng(lat,long);
-        var centerPosition = new google.maps.LatLng(lat, centerLong);
-
-        var mapOptions = {
-          zoom: 14,
-          center: centerPosition,
-          scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
-        }
-        var map = new google.maps.Map(document.getElementById("contactUs2Map"), mapOptions);
-
-        var marker = new google.maps.Marker({
-            position: myLatlng,
-            title:"Hello World!"
-        });
-        marker.setMap(map);
-    }
-
 }
+
 // Returns a function, that, as long as it continues to be invoked, will not
 // be triggered. The function will be called after it stops being called for
 // N milliseconds. If `immediate` is passed, trigger the function on the

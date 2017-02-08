@@ -1,15 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head><% include partials/template/head.ejs %></head>
 
 <body>
 
-
 	<% include partials/template/header.ejs %>
-
-
-<!-- code to show express-flash success message, after email signup -->
+	<!-- code to show express-flash success message, after email signup -->
 	<% if ( expressFlash.length > 0 ) { %>
 <div class="alert alert-success">
 	            <div class="container">
@@ -23,8 +19,7 @@
 	            </div>
 	        </div>
 <% } %>
-
-	<% include partials/content/frontpagecontent.ejs %>
+	<% include partials/content/home_content.ejs %>
 	<% include partials/template/footer.ejs %>
 	<% include partials/template/jsdefaults.ejs %>
 </body>

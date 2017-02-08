@@ -3,10 +3,11 @@ var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
 var Schema = mongoose.Schema;
 
-// our user model, this can been morphing since the beginning of development, 
+// our user model, this has been morphing since the beginning of development, 
 // it's pretty self explanatory! I have used clear field names where I can. 
 // the local, facebook and google embedded lists are used by PassportJS auth module
 var UserSchema = new Schema({ 
+  title: String,
   firstName: String,
   lastName: String,
   address1: String,
@@ -15,6 +16,7 @@ var UserSchema = new Schema({
   county: String,
   postcode: String,
   dob: String,
+  email: String,
   subjectName: String,
   canSessionLength30: Boolean,
   canSessionLength60: Boolean,
