@@ -2,44 +2,36 @@
 <!doctype html>
 <html>
   <head><% include partials/template/head.ejs %></head>
-
-<body>
-
-    <% include partials/template/header.ejs %>
 <body class="profile-page">
+<% include partials/template/header.ejs %>
+
 
     <div class="page-header" data-parallax="active" style="background-image: url('');"></div>
 
-    <div class="main main-raised">
+    <div class="col-md-11 col-md-offset-1 main main-raised">
         <div class="profile-content">
-            <div class="container">
+            <div class="col-md-1"></div>
+            <div class="col-md-7 container">
              
-                    <div class="col-xs-6 col-xs-offset-3">
+                    <div class="col-xs-9 col-xs-offset-2">
                        <div class="profile">
                            
-                                <img src="/img/profile_pics/<%= user.avatarName %> " alt="Circle Image" class="img-circle img-responsive img-raised">
+                                <img src="/img/profile_pics/<%= user.avatarName %> " alt="Circle Image" class="img-responsive img-raised img-rounded">
                          
                             <div class="work">
                                 <h3 class="title"><%= user.firstName %></h3>
-                                <h6>Subject: <% user.subjectName %></h6>
+                                <h6><%= user.subjectName %> Teacher</h6>
                                 <a href="#pablo" class="btn btn-just-icon btn-simple btn-success"><i alt="Identity has been verified" class="fa fa-check"></i></a>
                                 <a href="#pablo" class="btn btn-just-icon btn-simple btn-primary"><i class="fa fa-mortar-board"></i></a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-2 follow">
-                       <button class="btn btn-fab btn-primary" rel="tooltip" title="Add to favourites">
-                            <i class="material-icons">add</i>
-                        </button>
-                
-                </div>
-
 
                 <div class="description">
-                    <h4 class="title">Biography</h4>
+                    <h3 class="title">Biography</h3>
                     <p><%- user.biography %></p>
                 
-                                <h4 class="title">Stats</h4>
+                                <h3 class="title">Stats</h3>
                                 <ul class="list-unstyled">
                                     <li><b>60</b> Products</li>
                                     <li><b>4</b> Collections</li>
@@ -47,38 +39,135 @@
                                     <li><b>1.2K</b> Likes</li>
                                 </ul>
                                 <hr />
-                                <h4 class="title">About my Sessions</h4>
+                                <h3 class="title">About my Sessions</h3>
                                 <p class="description"><%- user.lessonDescription %></p>
                                 <hr />
+                                </div>
+
+<div class="card card-raised card-carousel">
+                            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                <div class="carousel slide" data-ride="carousel">
+
+                                    <!-- Indicators -->
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                        <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+                                        <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
+                                    </ol>
+
+                                    <!-- Wrapper for slides -->
+                                    <div class="carousel-inner">
+                                        <div class="item active">
+                                            <img src="./img/examples/bg2.jpg" alt="Awesome Image">
+                                            <div class="carousel-caption">
+                                                <h4><i class="material-icons">location_on</i> Yellowstone National Park, United States</h4>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <img src="./img/examples/bg3.jpg" alt="Awesome Image">
+                                            <div class="carousel-caption">
+                                                <h4><i class="material-icons">location_on</i> Somewhere Beyond, United States</h4>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <img src="./img/examples/bg.jpg" alt="Awesome Image">
+                                            <div class="carousel-caption">
+                                                <h4><i class="material-icons">location_on</i> Yellowstone National Park, United States</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Controls -->
+                                    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                                        <i class="material-icons">keyboard_arrow_left</i>
+                                    </a>
+                                    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                                        <i class="material-icons">keyboard_arrow_right</i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div> <!-- end carousel -->
+<div class="media-area">
+
+                                <hr>
+                                    <h3 class="title text-center">Reviews</h3>
+                                    <div class="media">
+                                        <a class="pull-left" href="#pablo">
+                                            <div class="avatar">
+                                                <img class="media-object" src="./img/faces/avatar.jpg" alt="...">
+                                            </div>
+                                        </a>
+                                        <div class="media-body">
+                                            <h4 class="media-heading">Tina Andrew <i class="fa fa-star profile-star"></i><i class="fa fa-star profile-star"></i><i class="fa fa-star profile-star"></i><i class="fa fa-star profile-star"></i><i class="fa fa-star profile-star"></i><small>· 7 minutes ago</small></h4>
+                                            <h6 class="text-muted"></h6>
+
+                                            <p>Chance too good. God level bars. I'm so proud of @LifeOfDesiigner #1 song in the country. Panda! Don't be scared of the truth because we need to restart the human foundation in truth I stand with the most humility. We are so blessed!</p>
+                                            <p>All praises and blessings to the families of people who never gave up on dreams. Don't forget, You're Awesome!</p>
+
+                                            <div class="media-footer">
+                                            <hr>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+
                                 </div>
 
             </div><!-- end container profile -->
 
 
 
+            <div class="col-md-3 container-booking">
+                <h3>Book a lesson today...</h3>
+                    <div class="card">
+                        <div class="content">
+                            <h5><i class="fa fa-calendar"></i> Availability</h5>
+                            <table>
+                            <tr>Mon </tr>
+                            <tr>Tues </tr>
+                            <tr>Wed </tr>
+                            <tr>Thur </tr>
+                            <tr>Fri </tr>
+                            <tr>Sat </tr>
+                            <tr>Sun </tr>
+                            </table>
+                            <hr>
+                            <h5><i class="fa fa-globe"></i> Lesson Location</h5>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optionsRadios"><span class="circle"></span><span class="check"></span>
+                                    At Teachers home
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optionsRadios"><span class="circle"></span><span class="check"></span>
+                                    At Students home
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optionsRadios"><span class="circle"></span><span class="check"></span>
+                                    At other location
+                                </label>
+                            </div>
+                    
+                            <hr>
+                            <h5><i class="fa fa-money"></i> Price<br>from <b>€35</b> per hour</h5>
+                                        
+                                        
 
-            <div class="container-booking">
+                                        <div class="footer text-center">
+                                            <a href="#pablo" class="btn btn-round btn-primary">Book Lesson</a>
+                                        </div>
+                                    </div>
+                                </div>
 
-
-
-                <div class="description">
-                    <h4 class="title">Biography</h4>
-                    <p><%- user.biography %></p>
-                
-                                <h4 class="title">Stats</h4>
-                                <ul class="list-unstyled">
-                                    <li><b>60</b> Products</li>
-                                    <li><b>4</b> Collections</li>
-                                    <li><b>331</b> Influencers</li>
-                                    <li><b>1.2K</b> Likes</li>
-                                </ul>
-                                <hr />
-                                <h4 class="title">About my Sessions</h4>
-                                <p class="description"><%- user.lessonDescription %></p>
-                                <hr />
-                </div>
 
             </div><!-- end container profile -->
+            <div class="col-md-1"></div>
 
 
 
@@ -87,9 +176,13 @@
 
 
         </div>
+        <div class="col-md-2"></div>
     </div>
 
-    <% include partials/template/footer.ejs %>
-    <% include partials/template/jsdefaults_dashboard.ejs %>
+
+<div class="profile-footer">
+<% include partials/template/footer.ejs %>
+</div>
+<% include partials/template/jsdefaults.ejs %>    
 </body>
 </html>

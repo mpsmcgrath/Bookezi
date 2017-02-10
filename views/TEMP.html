@@ -1,0 +1,83 @@
+
+<body class="profile-page">
+
+    <% include partials/template/header.ejs %>
+
+
+    <div class="page-header" data-parallax="active" style="background-image: url('');"></div>
+
+    <div class="col-md-11 col-md-offset-1 main main-raised">
+        <div class="profile-content">
+            <div class="col-md-2"></div>
+            <div class="col-md-6 container">
+             
+                    <div class="col-xs-9 col-xs-offset-2">
+                       <div class="profile">
+                           
+                                <img src="/img/profile_pics/<%= user.avatarName %> " alt="Circle Image" class="img-circle img-responsive img-raised">
+                         
+                            <div class="work">
+                                <h3 class="title"><%= user.firstName %></h3>
+                                <h6>Subject: <% user.subjectName %></h6>
+                                <a href="#pablo" class="btn btn-just-icon btn-simple btn-success"><i alt="Identity has been verified" class="fa fa-check"></i></a>
+                                <a href="#pablo" class="btn btn-just-icon btn-simple btn-primary"><i class="fa fa-mortar-board"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="description">
+                    <h4 class="title">Biography</h4>
+                    <p><%- user.biography %></p>
+                
+                                <h4 class="title">Stats</h4>
+                                <ul class="list-unstyled">
+                                    <li><b>60</b> Products</li>
+                                    <li><b>4</b> Collections</li>
+                                    <li><b>331</b> Influencers</li>
+                                    <li><b>1.2K</b> Likes</li>
+                                </ul>
+                                <hr />
+                                <h4 class="title">About my Sessions</h4>
+                                <p class="description"><%- user.lessonDescription %></p>
+                                <hr />
+                                </div>
+
+            </div><!-- end container profile -->
+
+
+
+
+            <div class="col-md-2 container-booking">
+
+
+
+                <div class="description">
+                    <h4 class="title">Biography</h4>
+                    <p><%- user.biography %></p>
+                
+                                <h4 class="title">Stats</h4>
+                                <ul class="list-unstyled">
+                                    <li><b>60</b> Products</li>
+                                    <li><b>4</b> Collections</li>
+                                    <li><b>331</b> Influencers</li>
+                                    <li><b>1.2K</b> Likes</li>
+                                </ul>
+                                <hr />
+                                <h4 class="title">About my Sessions</h4>
+                                <p class="description"><%- user.lessonDescription %></p>
+                                <hr />
+                </div>
+
+            </div><!-- end container profile -->
+
+
+
+
+
+
+
+        </div>
+    </div>
+    <% include partials/template/footer.ejs %>
+    <% include partials/template/jsdefaults_dashboard.ejs %>
+</body>
