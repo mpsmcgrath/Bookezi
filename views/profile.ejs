@@ -6,12 +6,12 @@
 <% include partials/template/header.ejs %>
 
 
-    <div class="page-header" data-parallax="active" style="background-image: url('');"></div>
+    <div class="page-header" data-parallax="active" style="background-image: url('./img/examples/sky.jpg');"></div>
 
-    <div class="col-md-11 col-md-offset-1 main main-raised">
+    <div class="col-md-11 main main-raised">
         <div class="profile-content">
             <div class="col-md-1"></div>
-            <div class="col-md-7 container">
+            <div class="col-md-7 container" style="margin-left: -10px">
              
                     <div class="col-xs-9 col-xs-offset-2">
                        <div class="profile">
@@ -19,7 +19,7 @@
                                 <img src="/img/profile_pics/<%= user.avatarName %> " alt="Circle Image" class="img-responsive img-raised img-rounded">
                          
                             <div class="work">
-                                <h3 class="title"><%= user.firstName %></h3>
+                                <h3><%= user.firstName %></h3>
                                 <h6><%= user.subjectName %> Teacher</h6>
                                 <a href="#pablo" class="btn btn-just-icon btn-simple btn-success"><i alt="Identity has been verified" class="fa fa-check"></i></a>
                                 <a href="#pablo" class="btn btn-just-icon btn-simple btn-primary"><i class="fa fa-mortar-board"></i></a>
@@ -27,23 +27,32 @@
                         </div>
                     </div>
 
-                <div class="description">
-                    <h3 class="title">Biography</h3>
+            <hr style="clear:both;">
+                        <div class="content">
+                    <h4>About <%= user.firstName %></h4>
                     <p><%- user.biography %></p>
-                
-                                <h3 class="title">Stats</h3>
+                </div>
+
+<hr>
+                        <div class="content">
+                                <h4>Stats</h4>
                                 <ul class="list-unstyled">
                                     <li><b>60</b> Products</li>
                                     <li><b>4</b> Collections</li>
                                     <li><b>331</b> Influencers</li>
                                     <li><b>1.2K</b> Likes</li>
                                 </ul>
-                                <hr />
-                                <h3 class="title">About my Sessions</h3>
-                                <p class="description"><%- user.lessonDescription %></p>
-                                <hr />
-                                </div>
+                        </div>
 
+
+                                                <div class="description">
+                    <hr>
+                                <h4>About my Sessions</h4>
+                                <p class="description"><%- user.lessonDescription %></p>
+                                </div>
+                    <hr>
+                                
+                                <h4>Media</h4>
 <div class="card card-raised card-carousel">
                             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                                 <div class="carousel slide" data-ride="carousel">
@@ -90,7 +99,7 @@
 <div class="media-area">
 
                                 <hr>
-                                    <h3 class="title text-center">Reviews</h3>
+                                    <h4>Reviews</h4>
                                     <div class="media">
                                         <a class="pull-left" href="#pablo">
                                             <div class="avatar">
@@ -120,9 +129,19 @@
 
 
             <div class="col-md-3 container-booking">
-                <h3>Book a lesson today...</h3>
-                    <div class="card">
+                
+                    <div class="card booking-card">
                         <div class="content">
+                        <h5><i class="fa fa-graduation-cap" style="color:blue;"></i> Subject</h5>
+                                               <div class="input-group">
+                                        <select name="subjectName" class="select btn btn-raised">
+                                            <option disabled selected> Choose subject</option>
+                                            <option value="maths">Maths</option>
+                                            <option value="piano">Piano</option>
+                                            <option value="yoga">Yoga</option>
+                                            <option value="tennis">Tennis</option>
+                                            <option value="acting">Acting</option>
+                                        </select>
                             <h5><i class="fa fa-calendar"></i> Availability</h5>
                             <table>
                             <tr>Mon </tr>
