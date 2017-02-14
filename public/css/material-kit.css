@@ -1004,6 +1004,24 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
   padding: 12px 12px;
   line-height: 1em;
 }
+
+.profile-widget-icons {
+padding: 0px !important; 
+margin-bottom: 15px !important;
+margin-top: 15px !important;
+}
+
+.profile-widget-titles {
+padding: 0px !important; 
+margin-bottom: 0px !important;
+margin-top: 0px !important;
+}
+
+.profile-widget-times {
+width: 100%;
+height: 30px;
+}
+
 .btn.btn-just-icon i,
 .navbar .navbar-nav > li > a.btn.btn-just-icon i {
   width: 20px;
@@ -5754,6 +5772,8 @@ footer .pull-center {
   margin: -60px 70px 70px 4%;
   border-radius: 6px;
   box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+  padding-left: 0px; 
+  padding-right: 0px;
 }
 
 .gallery .image img {
@@ -6103,6 +6123,7 @@ footer .pull-center {
   height: 180px;
   background-position: top center;
 }
+
 
 .profile-star {
   color: gold;

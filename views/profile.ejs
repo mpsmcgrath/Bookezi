@@ -2,11 +2,11 @@
 <!doctype html>
 <html>
   <head><% include partials/template/head.ejs %></head>
-<body class="profile-page">
+<body class="profile-page" style="background-image: linear-gradient(to bottom, white 0%, grey 100%)">
 <% include partials/template/header.ejs %>
 
 
-    <div class="page-header-profile" data-parallax="active" style="background-image: url('./img/examples/sky.jpg');"></div>
+    <div class="page-header-profile" data-parallax="active" ></div>
 
     <div class="col-md-11 main main-raised">
         <div class="profile-content">
@@ -19,8 +19,14 @@
                                 <img src="/img/profile_pics/<%= user.avatarName %> " alt="Circle Image" class="img-responsive img-raised img-rounded">
                          
                             <div class="work">
-                                <h3><%= user.firstName %></h3>
-                                <h6><%= user.subjectName %> Teacher</h6>
+                            <h3><%= user.firstName %><br>
+                                <i class="fa fa-star profile-star"></i>
+                                            <i class="fa fa-star profile-star"></i>
+                                            <i class="fa fa-star profile-star"></i>
+                                            <i class="fa fa-star profile-star"></i>
+                                            <i class="fa fa-star profile-star"></i>
+                                </h3>   
+                                <h6><%= user.subjectName %> Teacher  in <%= user.city %></h6>
                                 <a href="#pablo" class="btn btn-just-icon btn-simple btn-success"><i alt="Identity has been verified" class="fa fa-check"></i></a>
                                 <a href="#pablo" class="btn btn-just-icon btn-simple btn-primary"><i class="fa fa-mortar-board"></i></a>
                             </div>
@@ -44,12 +50,14 @@
                                 </ul>
                         </div>
 
+<hr>
 
-                                                <div class="description">
-                    <hr>
+                        <div class="content">
+                                <div>
                                 <h4>About my Sessions</h4>
                                 <p class="description"><%- user.lessonDescription %></p>
                                 </div>
+                        </div>
                     <hr>
                                 
                                 <h4>Media</h4>
@@ -103,11 +111,42 @@
                                     <div class="media">
                                         <a class="pull-left" href="#pablo">
                                             <div class="avatar">
-                                                <img class="media-object" src="./img/faces/avatar.jpg" alt="...">
+                                                <img class="media-object" src="./img/faces/face-6.jpg" alt="...">
                                             </div>
                                         </a>
                                         <div class="media-body">
-                                            <h4 class="media-heading">Tina Andrew <i class="fa fa-star profile-star"></i><i class="fa fa-star profile-star"></i><i class="fa fa-star profile-star"></i><i class="fa fa-star profile-star"></i><i class="fa fa-star profile-star"></i><small>· 7 minutes ago</small></h4>
+                                            <h4 class="media-heading">Tina Andrew 
+                                            <i class="fa fa-star profile-star"></i>
+                                            <i class="fa fa-star profile-star"></i>
+                                            <i class="fa fa-star profile-star"></i>
+                                            <i class="fa fa-star profile-star"></i>
+                                            <i class="fa fa-star profile-star"></i>
+                                            <small>· 7 minutes ago</small></h4>
+                                            <h6 class="text-muted"></h6>
+
+                                            <p>Chance too good. God level bars. I'm so proud of @LifeOfDesiigner #1 song in the country. Panda! Don't be scared of the truth because we need to restart the human foundation in truth I stand with the most humility. We are so blessed!</p>
+                                            <p>All praises and blessings to the families of people who never gave up on dreams. Don't forget, You're Awesome!</p>
+
+                                            <div class="media-footer">
+                                            <hr>
+                                            </div>
+                                        </div>
+                                    </div><!-- end review -->
+
+                                    <div class="media">
+                                        <a class="pull-left" href="#pablo">
+                                            <div class="avatar">
+                                                <img class="media-object" src="./img/faces/face-7.jpg" alt="...">
+                                            </div>
+                                        </a>
+                                        <div class="media-body">
+                                            <h4 class="media-heading">Tina Andrew 
+                                            <i class="fa fa-star profile-star"></i>
+                                            <i class="fa fa-star profile-star"></i>
+                                            <i class="fa fa-star profile-star"></i>
+                                            <i class="fa fa-star profile-star"></i>
+                                            <i class="fa fa-star profile-star"></i>
+                                            <small>· 7 minutes ago</small></h4>
                                             <h6 class="text-muted"></h6>
 
                                             <p>Chance too good. God level bars. I'm so proud of @LifeOfDesiigner #1 song in the country. Panda! Don't be scared of the truth because we need to restart the human foundation in truth I stand with the most humility. We are so blessed!</p>
@@ -119,7 +158,7 @@
 
 
                                         </div>
-                                    </div>
+                                    </div><!-- end review -->
 
 
                                 </div>
@@ -132,17 +171,9 @@
                 
                     <div class="card booking-card">
                         <div class="content">
-                        <h5><i class="fa fa-graduation-cap" style="color:blue;"></i> Subject</h5>
                                                <div class="input-group">
-                                        <select name="subjectName" class="select btn btn-raised">
-                                            <option disabled selected> Choose subject</option>
-                                            <option value="maths">Maths</option>
-                                            <option value="piano">Piano</option>
-                                            <option value="yoga">Yoga</option>
-                                            <option value="tennis">Tennis</option>
-                                            <option value="acting">Acting</option>
-                                        </select>
-                            <h5><i class="fa fa-calendar"></i> Availability</h5>
+
+                            <h5 class="profile-widget-titles"><i class="fa fa-calendar btn btn-simple btn-just-icon btn-primary profile-widget-icons"></i> Availability</h5>
                             <table>
                             <tr>Mon </tr>
                             <tr>Tues </tr>
@@ -152,8 +183,9 @@
                             <tr>Sat </tr>
                             <tr>Sun </tr>
                             </table>
+                            <div class="profile-widget-times"></div>
                             <hr>
-                            <h5><i class="fa fa-globe"></i> Lesson Location</h5>
+                            <h5 class="profile-widget-titles"><i class="fa fa-globe btn btn-simple btn-just-icon btn-success profile-widget-icons"></i> Lesson Location</h5>
                             <div class="radio">
                                 <label>
                                     <input type="radio" name="optionsRadios"><span class="circle"></span><span class="check"></span>
@@ -174,7 +206,7 @@
                             </div>
                     
                             <hr>
-                            <h5><i class="fa fa-money"></i> Price<br>from <b>€35</b> per hour</h5>
+                            <h5 class="profile-widget-titles"><i class="fa fa-euro btn btn-simple btn-just-icon btn-warning profile-widget-icons"></i> Price<br>from <b>€35</b> per hour</h5>
                                         
                                         
 
