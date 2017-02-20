@@ -17,6 +17,7 @@ var UserSchema = new Schema({
   postcode: String,
   dob: String,
   email: String,
+  backgroundChecked: { type:Boolean, default:false },
   subjectName: String,
   canSessionLength30: Boolean,
   canSessionLength60: Boolean,
@@ -30,6 +31,7 @@ var UserSchema = new Schema({
   lessonDescription: String,
   biography: String,
   avatarName: String,
+  averageRating: Number,
   local            : {
         email        : String,
         password     : String,

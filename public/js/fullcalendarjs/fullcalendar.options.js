@@ -2,7 +2,6 @@
 
 $(function(){               
                 $('#testAPI').click(function(e){
-                    e.preventDefault();
                     console.log('TestAPI Function is working');
                     
                     $.ajax({
@@ -19,11 +18,10 @@ $(function(){
             });
 
 
- // //////////////////////////////////////////////////////
+ ////////////////////////////////////////////////////////
                       function saveEvents(){
             for (i=0; i<objectCount;i++) {
              storedEvents.push( {"dow":globalEvents[i]._start._d.getDay(),"start":globalEvents[i]._start._d, "end":globalEvents[i]._end._d} );
-
          }
 
                       console.log('saveEvents() function triggered, it contains: ' + storedEvents);

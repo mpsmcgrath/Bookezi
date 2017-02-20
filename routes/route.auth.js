@@ -1,3 +1,6 @@
+var AddEmail    = require('../models/model.addemail')
+var User    = require('../models/model.users')
+var Bookings    = require('../models/model.bookings')
 //Nodemailer for the contact form
 var nodemailer  = require('nodemailer');
 var mg          = require('nodemailer-mailgun-transport');
@@ -15,11 +18,36 @@ module.exports = function(app, passport) {
 
 // GET home page.
 app.get('/', function(req, res) {
+
     title: 'Home'
-    res.render('index', { 
-        expressFlash: req.flash('success'), 
-    });
+    res.render('index', {expressFlash: req.flash('success')});
 });
+
+
+    // =====================================
+    // SEARCH  =============================
+    // =====================================
+    // POST the search query
+app.post('/search', function(req, res){
+  var subject
+  var location
+    User.find({ 'city':req.body.location, 'subjectName':req.body.subject },function(err, users){
+     if( !err ) {
+            myresults = users
+             console.log(myresults);
+             res.render('searchresults', {
+                expressFlash:req.flash('success'),
+                subject : req.body.subject,
+                location : req.body.location
+            });
+        } else {
+            return console.log( err );
+        }   
+    })
+})
+
+
+
 
     // =====================================
     // LOGIN ===============================
@@ -179,15 +207,17 @@ nodemailerMailgun.sendMail({
     // =====================================
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
+
     app.get('/profile', isLoggedIn, function(req, res) {
-                console.log('************req.user************************************************')
-                console.log(req.user)
-                console.log('********************************************************************')
-                            
+               console.log('************req.user************************************************')
+               console.log(req.user)
+               console.log('************req.user END************************************************')
+               
         res.render('profile.ejs', {
-            user : req.user, // get the user out of session and pass to template
-        });
-    });
+            user : req.user, 
+})
+});
+
 
     // =====================================
     // LOGOUT ==============================

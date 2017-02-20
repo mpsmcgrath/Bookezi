@@ -158,3 +158,15 @@ function isElementInViewport(elem) {
 
     return ((elemTop < viewportBottom) && (elemBottom > viewportTop));
 }
+
+$('.profile-widget-times div').hide(); 
+
+$(document).ready(function(){
+$('.avail-box-dow p').click(function() {
+    $("p").removeClass("dowactive");
+    $(this).addClass('dowactive');
+    $('.profile-widget-times div').hide();
+    var target = '#' + $(this).data('target');
+    $(target).show();
+});
+});

@@ -1,6 +1,6 @@
 //Welcome to our FYP.  This code has been extensively commented throughout for readability. 
-//The majority has been lifted and modified from various sources such as github/npm as is standard for 
-// node-express projects
+//The majority has been learned and modified examples used from various sources such as github/npm 
+//and tutorial websites and videos as is standard for node-express projects
 
 //This loads the .env config file, that has process.env variables for dev and prod
 require('dotenv').config(); 
@@ -44,12 +44,13 @@ var favicon     = require('serve-favicon');
 //morgan for logging
 var morgan      = require('morgan');
 
-//requires our user model
-var User        = require('./models/model.users')
+//fs for accessing the file system
+var fs = require('fs');
 
-//requires our user model
-var AddEmail        = require('./models/model.addemail')
-
+//requires all Mongoose data models in the models directory
+fs.readdirSync(__dirname + '/models').forEach(function(filename) {
+  if (~filename.indexOf('.js')) require(__dirname + '/models/' + filename)
+});
 
 //Nodemailer
 var nodemailer  = require('nodemailer');
@@ -82,13 +83,13 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session()); 
 
-//These are making our outter and authorised routes available as well as loading the PassportJS strategies
+//These are making our public and authorised routes available as well as loading the PassportJS strategies
 require('./routes/route.index')(app, express);
 require('./routes/route.auth')(app, passport);
 require('./config/config.passport')(passport);
 
 //global variable for web page title
-app.locals.pagetitle = " - KeepSkills.com";
+app.locals.pagetitle = " - Bookezi.com";
 
 
 // catch 404 and forward to error handler

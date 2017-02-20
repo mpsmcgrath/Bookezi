@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head><% include partials/template/head.ejs %></head>
+
+<body>
+
+	<% include partials/template/header.ejs %>
+	<!-- code to show express-flash success message, after email signup -->
+	<% if ( expressFlash.length > 0 ) { %>
+<div class="alert alert-success">
+	            <div class="container">
+					<div class="alert-icon">
+						<i class="material-icons">check</i>
+					</div>
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true"><i class="material-icons">clear</i></span>
+					</button>
+	            	<b>Success! </b>  <%= expressFlash %>
+	            </div>
+	        </div>
+<% } %>
+
+
+<p>Your search subject term was <%- subject %></p>
+<p>Your search location term was <%- location %></p>
+
+<div class="table-responsive">
+<table class="table table-stripped">
+  <tr>
+    <th>Profile Pic</th><th>Name</th><th>Location</th><th>Subject Taught</th><th>Bio (shortened)</th><th>Background Checked</th><th>Rating</th>
+  </tr>
+
+  <% for (var i = 0; i < myresults.length; i++) { %>
+    <tr>
+      <td><%= myresults[i].avatarName %></td>
+      <td><%= myresults[i].firstName %></td>
+      <td><%= myresults[i].city %></td>
+      <td><%= myresults[i].subjectName %></td>
+      <td><%= myresults[i].biography %></td>
+      <td><%= myresults[i].backgroundChecked %></td>
+      <td><%= myresults[i].averageRating %></td>
+    </tr>    
+  <% } %>
+</table>
+</div>
+
+
+	<% include partials/template/footer.ejs %>
+	<% include partials/template/jsdefaults.ejs %>
+</body>
+</html>

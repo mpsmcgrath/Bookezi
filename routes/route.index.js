@@ -119,12 +119,23 @@ nodemailerMailgun.sendMail({
           })
   });
 
+      app.get('/api/availability/:_id', function(req, res) {
+        Bookings.findById(req.params._id, function(err, bookings) {
+            if (err)
+                res.send(err);
+
+            res.json(bookings);
+            console.log('test for bookings GET');
+        });
+    })
+
 app.post('/api/availability', function(req, res){
   
   availability = req.body;
 
-        var booking = new Bookings();      // create a new instance of the User model
+        var booking = new Bookings();      // create a new instance of the booking model
         booking.availability = availability;  // set the availability equal to our array of JSON objects (start/end/day of week)
+        booking.user_id = req.user._id;
         booking.save(function(err) {
             if (err)
                 res.send(err);
@@ -132,6 +143,10 @@ app.post('/api/availability', function(req, res){
  res.send('success'+req.body);
 });
 });
+
+
+
+
 app.post('/api/users', function(req, res, next) {
         
         var user = new User();      // create a new instance of the User model

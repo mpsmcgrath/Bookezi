@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 // our bookings model, the user selects availability slots during the signup process, these are 'events' in FullCalendar, here we persist these events. 
 var BookingSchema = new Schema({ 
 
-	testvalue: String,
+	user_id: String,
 availability: [{
 	dow: Number,
 	start: String,
@@ -15,4 +15,4 @@ availability: [{
 });
 
 // Create the model for users and expose it to our app
-module.exports = mongoose.model('Booking', BookingSchema);
+module.exports = mongoose.model('bookings', BookingSchema);
