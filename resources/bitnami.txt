@@ -1,5 +1,7 @@
 Setting Bitnami application password to 'RYagBX3AbbHC'
 
+NOTE: In production change typeahead cache: to 'true'
+
 //MONGO NOTES
 Initial login after first install:
 sudo mongo admin --username root --password RYagBX3AbbHC 

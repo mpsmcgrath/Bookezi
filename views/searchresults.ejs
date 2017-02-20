@@ -21,28 +21,52 @@
 <% } %>
 
 
-<p>Your search subject term was <%- subject %></p>
-<p>Your search location term was <%- location %></p>
 
-<div class="table-responsive">
-<table class="table table-stripped">
-  <tr>
-    <th>Profile Pic</th><th>Name</th><th>Location</th><th>Subject Taught</th><th>Bio (shortened)</th><th>Background Checked</th><th>Rating</th>
-  </tr>
 
+<div class="container">
+<h4 class="title">You searched for a <%- subject %> Teacher in <%- location %>, there are <%= myresults.length %> results...</h4>
+	<div class="searchresults">
   <% for (var i = 0; i < myresults.length; i++) { %>
-    <tr>
-      <td><%= myresults[i].avatarName %></td>
-      <td><%= myresults[i].firstName %></td>
-      <td><%= myresults[i].city %></td>
-      <td><%= myresults[i].subjectName %></td>
-      <td><%= myresults[i].biography %></td>
-      <td><%= myresults[i].backgroundChecked %></td>
-      <td><%= myresults[i].averageRating %></td>
-    </tr>    
-  <% } %>
-</table>
+
+      <div class="row searchresult card">
+      
+
+      <div class="col-md-2">
+      
+      <div class="card card-profile card-plain">
+	<div class="card-avatar">
+			<img class="img" src="/img/profile_pics/<%= myresults[i].avatarName %> " />
+	</div>
+	<h3 class="title"><%= myresults[i].firstName %></h3>
+	</div>
 </div>
+
+      <div class="col-md-7">
+      <div><h4><i class="fa fa-globe btn btn-simple btn-just-icon profile-widget-icons"></i> <%= myresults[i].city %></h4></div>
+      <div><h5><%= myresults[i].subjectName %><h5></div>
+      <div><%= myresults[i].biography.substring(0, 200) %>...</div>
+      <div><%= myresults[i].backgroundChecked %></div>
+      </div>
+
+
+    <div class="col-md-3">
+      	<div class="searchresult-upper">
+  				<div><h4>Average Price: €<%= myresults[i].averagePrice %>/hour</h4></div>
+  			</div>
+
+	<h4>Average Rating:</h4>
+      <div>                                                 <i class="fa fa-star profile-star"></i>
+                                            <i class="fa fa-star profile-star"></i>
+                                            <i class="fa fa-star profile-star"></i>
+                                            <i class="fa fa-star profile-star"></i>
+                                            <i class="fa fa-star profile-star"></i></div>
+		
+    </div>
+    </div>    
+  <% } %>
+</div>
+</div>
+
 
 
 	<% include partials/template/footer.ejs %>

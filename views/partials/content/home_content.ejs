@@ -14,19 +14,19 @@
                 <form action="/search" method="post">
                   <div class="row">
                     <div class="col-md-4">
-                      <div class="form-group">
-                        <input type="text" value="" placeholder="enter subject..." class="form-control" name="subject" />
+                      <div class="form-group" id="search-box">
+                        <input class="typeahead-subject tt-query form-control" autocomplete="off" spellcheck="false" placeholder="enter subject..." name="subject" />
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                                <input type="text" value="" placeholder="enter location..." class="form-control" name="location" />
+                                <input type="text" placeholder="enter location..." class="typeahead-location tt-query form-control" name="location" />
                               </div>
                     </div>
                     <div class="col-md-1">
                     </div>
                     <div class="col-md-3">
-                      <button type="submit" class="btn btn-primary btn-block">Search</button>
+                      <button type="submit" class="btn btn-primary btn-block">Search</button>    
                     </div>
                   </div>
                 </form>

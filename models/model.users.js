@@ -32,6 +32,7 @@ var UserSchema = new Schema({
   biography: String,
   avatarName: String,
   averageRating: Number,
+  averagePrice: { type:Number, default:30 },
   local            : {
         email        : String,
         password     : String,

@@ -119,8 +119,8 @@ nodemailerMailgun.sendMail({
           })
   });
 
-      app.get('/api/availability/:_id', function(req, res) {
-        Bookings.findById(req.params._id, function(err, bookings) {
+      app.get('/api/availability/:user_id', function(req, res) {
+        Bookings.findById(req.params.user_id, function(err, bookings) {
             if (err)
                 res.send(err);
 
@@ -135,7 +135,7 @@ app.post('/api/availability', function(req, res){
 
         var booking = new Bookings();      // create a new instance of the booking model
         booking.availability = availability;  // set the availability equal to our array of JSON objects (start/end/day of week)
-        booking.user_id = req.user._id;
+        booking._id = req.user._id;
         booking.save(function(err) {
             if (err)
                 res.send(err);
@@ -172,6 +172,22 @@ app.post('/api/users', function(req, res, next) {
         });
     })
 
+      .get('/api/users/subjects', function(req, res) {
+        User.find().distinct('subjectName', function(err, users) {
+            if (err)
+                res.send(err);
+              res.send(JSON.stringify(users));          
+        });
+    })
+
+      .get('/api/users/locations', function(req, res) {
+        User.find().distinct('city', function(err, users) {
+            if (err)
+                res.send(err);
+              res.send(JSON.stringify(users));          
+        });
+    })
+
 app.get('/api/oneuser/:_id', function(req, res, next) {
         console.log('Request for object _id from req.params._id which is: ' + req.params._id);
       User.findById(req.params._id, function(err, user) {
@@ -180,6 +196,7 @@ app.get('/api/oneuser/:_id', function(req, res, next) {
         });
 
 })
+
 
 //Routes for Email Mailing List
       app.get('/addemail', function(req, res) {
