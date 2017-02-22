@@ -159,6 +159,9 @@ function isElementInViewport(elem) {
     return ((elemTop < viewportBottom) && (elemBottom > viewportTop));
 }
 
+
+//This jQuery enables the user to click a day of the week and see 
+//availability for that day on the profile page
 $('.profile-widget-times div').hide(); 
 
 $(document).ready(function(){

@@ -1,16 +1,3 @@
-/*! =========================================================
- *
- * Material Kit PRO - V1.0.0
- *
- * =========================================================
- *
- * Copyright 2016 Creative Code Srl
- * Available with purchase of license from http://www.creative-tim.com/product/material-kit-pro
- *
- * ========================================================= */
-/* ANIMATION */
-/* SHADOWS */
-/* Shadows (from mdl http://www.getmdl.io/) */
 body {
   background-color: #E5E5E5;
   color: #3C4858;
@@ -33,6 +20,10 @@ body.inverse .card .form-control {
 
 blockquote p {
   font-style: italic;
+}
+
+.capitalize {
+  text-transform: capitalize;
 }
 
 .life-of-material-kit {
@@ -5273,6 +5264,14 @@ footer .pull-center {
 .subscribe-line {
   padding: 30px 0;
 }
+
+.subscribe-line .title {
+  color: white;
+}
+.subscribe-line p {
+  color: white;
+}
+
 .subscribe-line .card {
   margin-top: 30px;
 }
@@ -6163,16 +6162,14 @@ footer .pull-center {
 .typeahead, .tt-query, .tt-hint {
   border: 2px solid #CCCCCC;
   border-radius: 8px;
-  font-size: 22px; /* Set input font size */
+  font-size: 16px; 
   height: 30px;
   line-height: 30px;
   outline: medium none;
   padding: 8px 12px;
-  width: 396px;
+  width: 296px;
 }
-.typeahead {
-  background-color: #FFFFFF;
-}
+
 .typeahead:focus {
   border: 2px solid #0097CF;
 }
@@ -6192,12 +6189,12 @@ footer .pull-center {
   width: 422px;
 }
 .tt-suggestion {
-  font-size: 22px;  /* Set suggestion dropdown font size */
-  padding: 3px 20px;
+  font-size: 18px;  /* Set suggestion dropdown font size */
+  padding: 3px 10px;
 }
 .tt-suggestion:hover {
   cursor: pointer;
-  background-color: #0097CF;
+  background-color: #3d3d3d;
   color: #FFFFFF;
 }
 .tt-suggestion p {
@@ -6213,6 +6210,9 @@ padding-top: 25px;
 
 .searchresult{
 min-height: 220px;
+}
+.searchresultmiddle {
+padding-left: 50px;
 }
 
 .img-searchresult {
@@ -6691,4 +6691,32 @@ width: 300px;
   .subscribe-line .btn {
     margin-top: 15px;
   }
+}
+
+body {
+  padding-top: 70px;
+}
+@media (max-width: 979px) {
+  body {
+    padding-top: 0px;
+  }
+}
+
+
+.vspacer20 {min-height: 20px;}
+.vspacer50 {min-height: 50px;}
+.vspacer50 {min-height: 100px;}
+
+.centered-text {
+    text-align:center;
+}   
+
+.alert {
+  margin-bottom: 0px;
+}
+
+#create_profile_buttons {
+
+    
+text-align:center;
 }

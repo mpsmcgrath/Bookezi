@@ -14,22 +14,22 @@
             </p>
             
 <!--Contact form-->
-            <form role="form" id="contact-form" method="post" action="/contactformsend">
+            <form role="form" data-toggle="validator" id="contact-form" method="post" action="/contactformsend">
               <div class="form-group label-floating">
                 <label class="control-label">Your name</label>
-                <input type="text" name="name" class="form-control">
+                <input type="text" pattern="^[A-Za-z ]{1,}$" name="name" class="form-control" required/>
               </div>
               <div class="form-group label-floating">
                 <label class="control-label">Email address</label>
-                <input type="email" name="email" class="form-control"/>
+                <input type="email" name="email" class="form-control" required/>
               </div>
               <div class="form-group label-floating">
                 <label class="control-label">Phone</label>
-                <input type="text" name="phone" class="form-control"/>
+                <input type="number" minlength="6" name="phone" class="form-control" required/>
               </div>
               <div class="form-group label-floating">
                 <label class="control-label">Your message</label>
-                <textarea name="message" class="form-control" id="message" rows="6"></textarea>
+                <textarea name="message" class="form-control" id="message" rows="6" required></textarea>
               </div>
               <div class="submit text-center">
                 <input type="submit" class="btn btn-primary btn-raised btn-round" value="Contact Us" />
@@ -97,12 +97,13 @@
           zoom: 14,
           center: myLatlng,
           scrollwheel: false, //disables scroll over the map, it is annoying when you scroll page
+          draggable: false
         }
         var map = new google.maps.Map(document.getElementById("contactUsMap"), mapOptions);
 
         var marker = new google.maps.Marker({
             position: myLatlng,
-            title:"KeepSkills.com, Dublin Headquarters"
+            title:"Bookezi.ie, Dublin Headquarters"
         });
         marker.setMap(map);
     },

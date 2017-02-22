@@ -29,9 +29,11 @@ app.get('/', function(req, res) {
     // =====================================
     // POST the search query
 app.post('/search', function(req, res){
-  var subject
-  var location
-    User.find({ 'city':req.body.location, 'subjectName':req.body.subject },function(err, users){
+  var subject = req.body.subject
+  subject = subject.toLowerCase()
+  var location = req.body.location
+  location = location.toLowerCase()
+    User.find({ 'city':location, 'subjectName':subject },function(err, users){
      if( !err ) {
             myresults = users
              console.log(myresults);
