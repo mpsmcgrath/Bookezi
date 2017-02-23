@@ -16,11 +16,20 @@ var profilePicDate = '';
 // All protected routes are wrapped in a function which is passed app and passport (PassportJS)
 module.exports = function(app, passport) {
 
+
+app.use(function(req,res,next){ 
+    res.locals.isLoggedIn = req.isAuthenticated(); 
+   next(); 
+});
+
+
 // GET home page.
 app.get('/', function(req, res) {
-
     title: 'Home'
-    res.render('index', {expressFlash: req.flash('success')});
+    var isLoggedIn = res.locals.isLoggedIn
+    res.render('index', {
+        expressFlash: req.flash('success')
+    })
 });
 
 
@@ -29,6 +38,7 @@ app.get('/', function(req, res) {
     // =====================================
     // POST the search query
 app.post('/search', function(req, res){
+  var isLoggedIn = res.locals.isLoggedIn
   var subject = req.body.subject
   subject = subject.toLowerCase()
   var location = req.body.location
@@ -55,7 +65,7 @@ app.post('/search', function(req, res){
     // =====================================
     // GET the login form
     app.get('/login', function(req, res) {
-        
+        var isLoggedIn = res.locals.isLoggedIn
     // render the page and pass in any flash data if it exists
         res.render('login.ejs', { 
             title: 'Login',
@@ -77,6 +87,7 @@ app.post('/search', function(req, res){
     // =====================================
     // GET the signup form
     app.get('/signup', function(req, res) {
+            var isLoggedIn = res.locals.isLoggedIn
         res.render('signup.ejs', { 
             title: 'Signup',
             message: req.flash('signupMessage'),  
@@ -98,6 +109,17 @@ app.post('/search', function(req, res){
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
     app.get('/createprofile', isLoggedIn, function(req, res) {
+            var isLoggedIn = res.locals.isLoggedIn
+        if (req.user.firstName) {
+
+            res.render('dashboard.ejs', {
+            user : req.user, // get the user out of session and pass to template
+            message: req.flash('signupMessage'),
+            title: 'Dashboard'
+        });
+
+        } else {
+
         res.render('createprofile.ejs', {
             user : req.user, // get the user out of session and pass to template
             message: req.flash('signupMessage'),
@@ -106,7 +128,7 @@ app.post('/search', function(req, res){
 
 
 
-    });
+    }});
 
 
     // =====================================
@@ -147,7 +169,7 @@ var upload   = multer({
     var storedEvents = []
 
     app.post('/createprofile', upload.single("image"), isLoggedIn, function(req, res) {
- 
+            var isLoggedIn = res.locals.isLoggedIn
  //bodyparser will store everything in req.body and here we pass it to our user session
  //then save to our database user.save() and redirect to dashboard
            console.log(req.body); 
@@ -210,9 +232,10 @@ nodemailerMailgun.sendMail({
     // we will use route middleware to verify this (the isLoggedIn function)
 
     app.get('/profile', isLoggedIn, function(req, res) {
-               console.log('************req.user************************************************')
-               console.log(req.user)
-               console.log('************req.user END************************************************')
+            var isLoggedIn = res.locals.isLoggedIn
+            console.log('************req.user************************************************')
+            console.log(req.user)
+            console.log('************req.user END************************************************')
                
         res.render('profile.ejs', {
             user : req.user, 
@@ -234,9 +257,7 @@ nodemailerMailgun.sendMail({
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
     app.get('/dashboard', isLoggedIn, function(req, res) {
-            console.log(req.user),
-            console.log('---------'),
-            console.log(req.session),
+            var isLoggedIn = res.locals.isLoggedIn
         res.render('dashboard.ejs', {
             user : req.user, // get the user out of session and pass to template
             message: req.flash('signupMessage'),
@@ -293,7 +314,7 @@ nodemailerMailgun.sendMail({
         });
         app.post('/connect', passport.authenticate('local-signup', {
             successRedirect : '/dashboard', // redirect to the secure profile section
-            failureRedirect : '/SIGNUP', // redirect back to the signup page if there is an error
+            failureRedirect : '/', // redirect back to the signup page if there is an error
             failureFlash : true // allow flash messages
         }));
 
@@ -374,4 +395,6 @@ function isLoggedIn(req, res, next) {
     res.redirect('/login');
 }
 
+
 }
+

@@ -1,7 +1,7 @@
   <body class="login-page">
     
 
-    <div class="page-header header-filter" style="background-image: url('img/bg7.jpg'); background-size: cover; background-position: top center;">
+    <div class="page-header header-filter" style="background-image: url('img/examples/sky.jpg'); background-size: cover; background-position: top center;">
                  <!-- show any messages that come back with authentication -->
     <% if (message.length > 0) { %>
         <div class="alert alert-danger"><%= message %></div>
@@ -9,16 +9,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
-                    <div class="card card-signup">
-                        <form class="form" method="post" action="/login">
-                            <div class="header header-primary text-center">
-                                <h4 class="card-title">Log in</h4>
+                    <div class="card card-signup loginflaplower">
+                        <form class="form" method="post" action="/login" role="form" data-toggle="validator">
+                            <div class="header loginflap text-center">
+                                <h4 class="title">Log in</h4>
                                 <div class="social-line">
                                     <a href="/connect/facebook" class="btn btn-just-icon btn-simple">
                                         <i class="fa fa-facebook-square"></i>
                                     </a>
                                     <a href="/connect/google" class="btn btn-just-icon btn-simple">
-                                        <i class="fa fa-google-plus"></i>
+                                        <i class="fa fa-google"></i>
                                     </a>
                                 </div>
                             </div>
@@ -29,14 +29,14 @@
                                     <span class="input-group-addon">
                                         <i class="material-icons">email</i>
                                     </span>
-                                    <input type="text" class="form-control" placeholder="Email..." name="email">
+                                    <input type="email" class="form-control" placeholder="Email..." name="email" required>
                                 </div>
 
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                         <i class="material-icons">lock_outline</i>
                                     </span>
-                                    <input type="password" placeholder="Password..." class="form-control" name="password" />
+                                    <input type="password" placeholder="Password..." class="form-control" name="password" required/>
                                 </div>
                             </div>
                             <div class="footer text-center">

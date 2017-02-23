@@ -6213,6 +6213,7 @@ min-height: 220px;
 }
 .searchresultmiddle {
 padding-left: 50px;
+padding-top: 20px;
 }
 
 .img-searchresult {
@@ -6352,6 +6353,14 @@ width: 300px;
 .login-page .footer .copyright,
 .login-page .footer a {
   color: #FFFFFF;
+}
+
+.login-page .loginflap {
+  background-image: linear-gradient(#0a2f84, #3f51b5)
+}
+
+.login-page .loginflaplower {
+  background-image: linear-gradient(#e8f0ff, #ffffff)
 }
 
 .signup-page .page-header {

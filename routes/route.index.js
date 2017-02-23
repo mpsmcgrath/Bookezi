@@ -13,6 +13,12 @@ var nodemailerMailgun = nodemailer.createTransport(mg(auth));
 //export all the routes so we don't need to list them all in app.js
 module.exports  = function(app, express) {
 
+
+  app.use(function(req,res,next){ 
+    res.locals.isLoggedIn = req.isAuthenticated(); 
+   next(); 
+});
+
 app.use(function(req, res, next) {
     // Blank function - Analytics? Validation?
     console.log('Logging middleware goes here before next() function');
@@ -22,6 +28,7 @@ app.use(function(req, res, next) {
 
 // GET about page.
 app.get('/about', function(req, res, next) {
+      var isLoggedIn = res.locals.isLoggedIn
   res.render('about', { 
   	title: 'About',  
   });
@@ -29,6 +36,7 @@ app.get('/about', function(req, res, next) {
 
 // GET contact page.
 app.get('/contact', function(req, res) {
+      var isLoggedIn = res.locals.isLoggedIn
   res.render('contact', { 
     title: 'Contact',
     expressFlash: req.flash('success')  
@@ -37,6 +45,7 @@ app.get('/contact', function(req, res) {
 
 // GET t&cs page.
 app.get('/termsandconditions', function(req, res) {
+      var isLoggedIn = res.locals.isLoggedIn
   res.render('termsandconditions', { 
     title: 'Terms and Conditions',
     expressFlash: req.flash('success')  
@@ -45,6 +54,7 @@ app.get('/termsandconditions', function(req, res) {
 
 // GET how it works page.
 app.get('/howitworks', function(req, res) {
+      var isLoggedIn = res.locals.isLoggedIns
   res.render('howitworks', { 
     title: 'How it Works',  
   });

@@ -21,7 +21,11 @@ HTML modified from http://www.w3schools.com/bootstrap/bootstrap_navbar.asp and s
       
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+        <% if (isLoggedIn) { %>
+        <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+    <% } else { %>
         <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+   <% } %> 
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
