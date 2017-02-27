@@ -381,15 +381,16 @@ nodemailerMailgun.sendMail({
     app.get('/profile', isLoggedIn, function(req, res) {
             var isLoggedIn = res.locals.isLoggedIn
             var booking
-            var monAvailTime = 'Currently unavailable on Mondays'
-            var tueAvailTime = 'Currently unavailable on Tuesdays' 
-            var wedAvailTime = 'Currently unavailable on Wednesdays'
-            var thuAvailTime = 'Currently unavailable on Thursdays'
-            var friAvailTime = 'Currently unavailable on Fridays'
-            var satAvailTime = 'Currently unavailable on Saturdays'
-            var sunAvailTime = 'Currently unavailable on Sundays'
+            var monAvailTime = ''
+            var tueAvailTime = ' '
+            var wedAvailTime = ' '
+            var thuAvailTime = ' '
+            var friAvailTime = ' '
+            var satAvailTime = ' '
+            var sunAvailTime = ' '
 
            isAvailable();
+           //notAvailable();
 
 
 function isAvailable() {
@@ -398,21 +399,21 @@ function isAvailable() {
             Bookings.findOne({ '_id':req.user._id }, function (err, booking) {
             if (err) return handleError(err);
            for (i=0; i<booking.availability.length; i++){
-                if(booking.availability[i].dow == 0){monAvailTime = moment.utc(booking.availability[i].start).format("HH:mm")+' - '+moment.utc(booking.availability[i].end).format("HH:mm")}
-                else if(booking.availability[i].dow == 1){tueAvailTime = moment.utc(booking.availability[i].start).format("HH:mm")+' - '+moment.utc(booking.availability[i].end).format("HH:mm")}
-                else if(booking.availability[i].dow == 2){wedAvailTime = moment.utc(booking.availability[i].start).format("HH:mm")+' - '+moment.utc(booking.availability[i].end).format("HH:mm")}
-                else if(booking.availability[i].dow == 3){thuAvailTime = moment.utc(booking.availability[i].start).format("HH:mm")+' - '+moment.utc(booking.availability[i].end).format("HH:mm")}
-                else if(booking.availability[i].dow == 4){friAvailTime = moment.utc(booking.availability[i].start).format("HH:mm")+' - '+moment.utc(booking.availability[i].end).format("HH:mm")}
-                else if(booking.availability[i].dow == 5){satAvailTime = moment.utc(booking.availability[i].start).format("HH:mm")+' - '+moment.utc(booking.availability[i].end).format("HH:mm")}
-                else if(booking.availability[i].dow == 6){sunAvailTime = moment.utc(booking.availability[i].start).format("HH:mm")+' - '+moment.utc(booking.availability[i].end).format("HH:mm")}
-                console.log(monAvailTime)
-                console.log(tueAvailTime)
-                console.log(wedAvailTime)
-                console.log(thuAvailTime)
-                console.log(friAvailTime)
-                console.log(satAvailTime)
-                console.log(sunAvailTime)}
-
+                if(booking.availability[i].dow == 0){
+                    monAvailTime = monAvailTime+moment.utc(booking.availability[i].start).format("HH:mm")+' - '+moment.utc(booking.availability[i].end).format("HH:mm")+' <br>'}
+                else if(booking.availability[i].dow == 1){
+                    tueAvailTime = tueAvailTime+' '+moment.utc(booking.availability[i].start).format("HH:mm")+' - '+moment.utc(booking.availability[i].end).format("HH:mm")+' <br>'}
+                else if(booking.availability[i].dow == 2){
+                    wedAvailTime = wedAvailTime+' '+moment.utc(booking.availability[i].start).format("HH:mm")+' - '+moment.utc(booking.availability[i].end).format("HH:mm")+' <br>'}
+                else if(booking.availability[i].dow == 3){
+                    thuAvailTime = thuAvailTime+' '+moment.utc(booking.availability[i].start).format("HH:mm")+' - '+moment.utc(booking.availability[i].end).format("HH:mm")+' <br>'}
+                else if(booking.availability[i].dow == 4){
+                    friAvailTime = friAvailTime+' '+moment.utc(booking.availability[i].start).format("HH:mm")+' - '+moment.utc(booking.availability[i].end).format("HH:mm")+' <br>'}
+                else if(booking.availability[i].dow == 5){
+                    satAvailTime = satAvailTime+' '+moment.utc(booking.availability[i].start).format("HH:mm")+' - '+moment.utc(booking.availability[i].end).format("HH:mm")+' <br>'}
+                else if(booking.availability[i].dow == 6){
+                    sunAvailTime = sunAvailTime+' '+moment.utc(booking.availability[i].start).format("HH:mm")+' - '+moment.utc(booking.availability[i].end).format("HH:mm")+' <br>'}
+                                    }
         res.render('profile.ejs', {
             user : req.user, 
             mon : monAvailTime,
@@ -421,24 +422,17 @@ function isAvailable() {
             thu : thuAvailTime,
             fri : friAvailTime,
             sat : satAvailTime,
-            sun : sunAvailTime
-});
+            sun : sunAvailTime});
+})} 
 
-                
-           });
-}
+
+
+
+
 
 
 
 })
-
-
-
-
-
-
-
-
 
     // =====================================
     // LOGOUT ==============================

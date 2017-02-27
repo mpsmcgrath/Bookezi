@@ -182,13 +182,13 @@
                             <div class="avail-box-dow dowsat"><p data-target="dow6">Sat </p></div>
                             <div class="avail-box-dow dowsun"><p data-target="dow7">Sun </p></div>
                             <div class="profile-widget-times">
-                                <div id="dow1"><p><%- mon %></p></div>
-                                <div id="dow2"><p><%- tue %></p></div>
-                                <div id="dow3"><p><%- wed %></p></div>
-                                <div id="dow4"><p><%- thu %></p></div>
-                                <div id="dow5"><p><%= fri %></p></div>
-                                <div id="dow6"><p><%= sat %></p></div>
-                                <div id="dow7"><p><%= sun %></p></div>
+                                <div id="dow1"><% if (mon == '') { %><p>No availability on Mondays</p><% } %> </div>
+                                <div id="dow2"><% if (mon == '') { %><p>No availability on Tuesdays</p><% } %> </div>
+                                <div id="dow3"><% if (mon == '') { %><p>No availability on Wednesdays</p><% } %> </div>
+                                <div id="dow4"><% if (mon == '') { %><p>No availability on Thursdays</p><% } %> </div>
+                                <div id="dow5"><% if (mon == '') { %><p>No availability on Fridays</p><% } %> </div>
+                                <div id="dow6"><% if (mon == '') { %><p>No availability on Satdays</p><% } %> </div>
+                                <div id="dow7"><% if (mon == '') { %><p>No availability on Sundays</p><% } %> </div>
                             </div>
                             <hr>
                             <h5 class="profile-widget-titles"><i class="fa fa-globe btn btn-simple btn-just-icon btn-success profile-widget-icons"></i> Lesson Location</h5>
