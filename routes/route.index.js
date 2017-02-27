@@ -92,7 +92,7 @@ nodemailerMailgun.sendMail({
     // =====================================
 
 //delete request
-  app.delete('/api/oneuser/:_id', function(req, res) {
+  app.delete('/api/oneuser/teacher-:_id', function(req, res) {
 
   console.log('DELETE');
   
@@ -198,11 +198,14 @@ app.post('/api/users', function(req, res, next) {
         });
     })
 
-app.get('/api/oneuser/:_id', function(req, res, next) {
+app.get('/teacher-:_id', function(req, res, next) {
         console.log('Request for object _id from req.params._id which is: ' + req.params._id);
+                    var isLoggedIn = res.locals.isLoggedIn
       User.findById(req.params._id, function(err, user) {
             if (err) res.send(err);
-            res.json(user);
+        res.render('profile.ejs', {
+            user : user, 
+})
         });
 
 })

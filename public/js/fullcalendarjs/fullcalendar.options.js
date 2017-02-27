@@ -10,8 +10,8 @@ $(function(){
                         contentType: 'application/json',
                         url: 'http://localhost:8080/api/availability',                      
                         success: function(data) {
-                            console.log('success');
-                            console.log(JSON.stringify(storedEvents));
+                            //console.log('success');
+                            //console.log(JSON.stringify(storedEvents));
                         }
                     });
                 });             
@@ -21,10 +21,10 @@ $(function(){
  ////////////////////////////////////////////////////////
                       function saveEvents(){
             for (i=0; i<objectCount;i++) {
-             storedEvents.push( {"dow":globalEvents[i]._start._d.getDay(),"start":globalEvents[i]._start._d, "end":globalEvents[i]._end._d} );
+             storedEvents.push( {"title":globalEvents[i].title,"dow":globalEvents[i]._start._d.getDay(),"start":globalEvents[i]._start._d, "end":globalEvents[i]._end._d} );
          }
 
-                      console.log('saveEvents() function triggered, it contains: ' + storedEvents);
+                      //console.log('saveEvents() function triggered, it contains: ' + storedEvents);
 
             }
              

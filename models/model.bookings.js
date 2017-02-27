@@ -6,6 +6,7 @@ var Schema = mongoose.Schema;
 var BookingSchema = new Schema({ 
 
 availability: [{
+	title: String,
 	dow: Number,
 	start: String,
 	end: String

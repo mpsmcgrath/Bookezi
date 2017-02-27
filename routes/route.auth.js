@@ -1,3 +1,9 @@
+var moment = require('moment');
+moment().format();
+
+
+
+
 var AddEmail    = require('../models/model.addemail')
 var User    = require('../models/model.users')
 var Bookings    = require('../models/model.bookings')
@@ -25,6 +31,7 @@ app.use(function(req,res,next){
 
 // GET home page.
 app.get('/', function(req, res) {
+
     title: 'Home'
     var isLoggedIn = res.locals.isLoggedIn
     res.render('index', {
@@ -38,11 +45,14 @@ app.get('/', function(req, res) {
     // =====================================
     // POST the search query
 app.post('/search', function(req, res){
-  var isLoggedIn = res.locals.isLoggedIn
   var subject = req.body.subject
   subject = subject.toLowerCase()
   var location = req.body.location
-  location = location.toLowerCase()
+ location = location.toLowerCase()
+    //NOTE: ADD IF STATEMENT TO ALLOW EMPTY BOXES
+  var isLoggedIn = res.locals.isLoggedIn
+  var identifier = req.body._id
+
     User.find({ 'city':location, 'subjectName':subject },function(err, users){
      if( !err ) {
             myresults = users
@@ -50,7 +60,8 @@ app.post('/search', function(req, res){
              res.render('searchresults', {
                 expressFlash:req.flash('success'),
                 subject : req.body.subject,
-                location : req.body.location
+                location : req.body.location,
+                identifier : req.body._id
             });
         } else {
             return console.log( err );
@@ -58,6 +69,142 @@ app.post('/search', function(req, res){
     })
 })
 
+    // =====================================
+    // SEARCH BY SUBJECT ===================
+    // =====================================
+app.get('/private-piano-lessons', function(req, res){
+  var isLoggedIn = res.locals.isLoggedIn
+  var subject = 'piano'
+    User.find({ 'subjectName':subject },function(err, users){
+     if( !err ) {
+            myresults = users
+             console.log(myresults);
+             res.render('searchresults', {
+                expressFlash:req.flash('success'),
+                subject : subject,
+                location : 'any location'
+            });
+        } else { return console.log( err );
+        }})})
+
+app.get('/private-guitar-lessons', function(req, res){
+  var isLoggedIn = res.locals.isLoggedIn
+  var subject = 'guitar'
+    User.find({ 'subjectName':subject },function(err, users){
+     if( !err ) {
+            myresults = users
+             console.log(myresults);
+             res.render('searchresults', {
+                expressFlash:req.flash('success'),
+                subject : subject,
+                location : 'any location'
+            });
+        } else { return console.log( err );
+        }})})
+
+app.get('/private-singing-lessons', function(req, res){
+  var isLoggedIn = res.locals.isLoggedIn
+  var subject = 'singing'
+    User.find({ 'subjectName':subject },function(err, users){
+     if( !err ) {
+            myresults = users
+             console.log(myresults);
+             res.render('searchresults', {
+                expressFlash:req.flash('success'),
+                subject : subject,
+                location : 'any location'
+            });
+        } else { return console.log( err );
+        }})})
+
+app.get('/private-violin-lessons', function(req, res){
+  var isLoggedIn = res.locals.isLoggedIn
+  var subject = 'violin'
+    User.find({ 'subjectName':subject },function(err, users){
+     if( !err ) {
+            myresults = users
+             console.log(myresults);
+             res.render('searchresults', {
+                expressFlash:req.flash('success'),
+                subject : subject,
+                location : 'any location'
+            });
+        } else { return console.log( err );
+        }})})
+
+app.get('/private-drum-lessons', function(req, res){
+  var isLoggedIn = res.locals.isLoggedIn
+  var subject = 'drum'
+    User.find({ 'subjectName':subject },function(err, users){
+     if( !err ) {
+            myresults = users
+             console.log(myresults);
+             res.render('searchresults', {
+                expressFlash:req.flash('success'),
+                subject : subject,
+                location : 'any location'
+            });
+        } else { return console.log( err );
+        }})})
+
+app.get('/private-keyboard-lessons', function(req, res){
+  var isLoggedIn = res.locals.isLoggedIn
+  var subject = 'keyboard'
+    User.find({ 'subjectName':subject },function(err, users){
+     if( !err ) {
+            myresults = users
+             console.log(myresults);
+             res.render('searchresults', {
+                expressFlash:req.flash('success'),
+                subject : subject,
+                location : 'any location'
+            });
+        } else { return console.log( err );
+        }})})
+
+app.get('/private-recorder-lessons', function(req, res){
+  var isLoggedIn = res.locals.isLoggedIn
+  var subject = 'recorder'
+    User.find({ 'subjectName':subject },function(err, users){
+     if( !err ) {
+            myresults = users
+             console.log(myresults);
+             res.render('searchresults', {
+                expressFlash:req.flash('success'),
+                subject : subject,
+                location : 'any location'
+            });
+        } else { return console.log( err );
+        }})})
+
+app.get('/private-electric-guitar-lessons', function(req, res){
+  var isLoggedIn = res.locals.isLoggedIn
+  var subject = 'electric guitar'
+    User.find({ 'subjectName':subject },function(err, users){
+     if( !err ) {
+            myresults = users
+             console.log(myresults);
+             res.render('searchresults', {
+                expressFlash:req.flash('success'),
+                subject : subject,
+                location : 'any location'
+            });
+        } else { return console.log( err );
+        }})})
+
+app.get('/all-private-lessons', function(req, res){
+  var isLoggedIn = res.locals.isLoggedIn
+    User.find({},function(err, users){
+     if( !err ) {
+            myresults = users
+             console.log(myresults);
+             res.render('searchresults', {
+                expressFlash:req.flash('success'),
+                subject : 'any subject',
+                location : 'any location'
+            });
+        } else { return console.log( err );
+        }})})
 
 
     // =====================================
@@ -204,10 +351,10 @@ var upload   = multer({
 
 // Send user welcome email 
 nodemailerMailgun.sendMail({
-  from: 'signup@KeepSkills.com',
+  from: 'signup@bookezi.com',
   to: user.email, // An array if you have multiple recipients.
-  subject: 'Welcome to KeepSkills ' + user.firstName,
-  'h:Reply-To': 'sean@keepskills.com',
+  subject: 'Welcome to bookezi ' + user.firstName,
+  'h:Reply-To': 'sean@bookezi.com',
   //HTML email content can be sent straight from the message variable
   //html: req.body.message,
   //You can use plain "text:" either
@@ -226,21 +373,71 @@ nodemailerMailgun.sendMail({
 
 
     // =====================================
-    // PROFILE SECTION =====================
+    // PROFILE SECTION 
     // =====================================
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
 
     app.get('/profile', isLoggedIn, function(req, res) {
             var isLoggedIn = res.locals.isLoggedIn
-            console.log('************req.user************************************************')
-            console.log(req.user)
-            console.log('************req.user END************************************************')
-               
+            var booking
+            var monAvailTime = 'Currently unavailable on Mondays'
+            var tueAvailTime = 'Currently unavailable on Tuesdays' 
+            var wedAvailTime = 'Currently unavailable on Wednesdays'
+            var thuAvailTime = 'Currently unavailable on Thursdays'
+            var friAvailTime = 'Currently unavailable on Fridays'
+            var satAvailTime = 'Currently unavailable on Saturdays'
+            var sunAvailTime = 'Currently unavailable on Sundays'
+
+           isAvailable();
+
+
+function isAvailable() {
+            //Find the availability slots for the Teacher and convert the timestamps to 
+            //readable times using momentJS. Then pass to the view and the booking widget
+            Bookings.findOne({ '_id':req.user._id }, function (err, booking) {
+            if (err) return handleError(err);
+           for (i=0; i<booking.availability.length; i++){
+                if(booking.availability[i].dow == 0){monAvailTime = moment.utc(booking.availability[i].start).format("HH:mm")+' - '+moment.utc(booking.availability[i].end).format("HH:mm")}
+                else if(booking.availability[i].dow == 1){tueAvailTime = moment.utc(booking.availability[i].start).format("HH:mm")+' - '+moment.utc(booking.availability[i].end).format("HH:mm")}
+                else if(booking.availability[i].dow == 2){wedAvailTime = moment.utc(booking.availability[i].start).format("HH:mm")+' - '+moment.utc(booking.availability[i].end).format("HH:mm")}
+                else if(booking.availability[i].dow == 3){thuAvailTime = moment.utc(booking.availability[i].start).format("HH:mm")+' - '+moment.utc(booking.availability[i].end).format("HH:mm")}
+                else if(booking.availability[i].dow == 4){friAvailTime = moment.utc(booking.availability[i].start).format("HH:mm")+' - '+moment.utc(booking.availability[i].end).format("HH:mm")}
+                else if(booking.availability[i].dow == 5){satAvailTime = moment.utc(booking.availability[i].start).format("HH:mm")+' - '+moment.utc(booking.availability[i].end).format("HH:mm")}
+                else if(booking.availability[i].dow == 6){sunAvailTime = moment.utc(booking.availability[i].start).format("HH:mm")+' - '+moment.utc(booking.availability[i].end).format("HH:mm")}
+                console.log(monAvailTime)
+                console.log(tueAvailTime)
+                console.log(wedAvailTime)
+                console.log(thuAvailTime)
+                console.log(friAvailTime)
+                console.log(satAvailTime)
+                console.log(sunAvailTime)}
+
         res.render('profile.ejs', {
             user : req.user, 
-})
+            mon : monAvailTime,
+            tue : tueAvailTime,
+            wed : wedAvailTime,
+            thu : thuAvailTime,
+            fri : friAvailTime,
+            sat : satAvailTime,
+            sun : sunAvailTime
 });
+
+                
+           });
+}
+
+
+
+})
+
+
+
+
+
+
+
 
 
     // =====================================
