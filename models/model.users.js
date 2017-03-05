@@ -16,7 +16,7 @@ var UserSchema = new Schema({
   postcode: { type: String, lowercase: true, trim: true },
   dob: String,
   email: { type: String, lowercase: true, trim: true },
-  backgroundChecked: { type:Boolean, default:false },
+  backgroundChecked: { type:Boolean, default: false },
   subjectName: String,
   canSessionLength30: Boolean,
   canSessionLength60: Boolean,

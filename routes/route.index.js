@@ -1,3 +1,6 @@
+var moment = require('moment');
+moment().format();
+
 var AddEmail    = require('../models/model.addemail')
 var User    = require('../models/model.users')
 var Bookings    = require('../models/model.bookings')
@@ -135,7 +138,7 @@ nodemailerMailgun.sendMail({
                 res.send(err);
 
             res.json(bookings);
-            console.log('test for bookings GET');
+            console.log('test for availability GET');
         });
     })
 
@@ -198,17 +201,100 @@ app.post('/api/users', function(req, res, next) {
         });
     })
 
-app.get('/teacher-:_id', function(req, res, next) {
-        console.log('Request for object _id from req.params._id which is: ' + req.params._id);
-                    var isLoggedIn = res.locals.isLoggedIn
-      User.findById(req.params._id, function(err, user) {
+app.get('/t_:_id', function(req, res) {
+  var user;
+           User.findById(req.params._id, function(err, user) {
             if (err) res.send(err);
-        res.render('profile.ejs', {
-            user : user, 
-})
-        });
 
-})
+
+console.log('req.params._id = '+req.params._id)
+      
+            var isLoggedIn = res.locals.isLoggedIn
+            var booking
+            var monAvailTime = ''
+            var tueAvailTime = ''
+            var wedAvailTime = ''
+            var thuAvailTime = ''
+            var friAvailTime = ''
+            var satAvailTime = ''
+            var sunAvailTime = ''
+
+          getAvailibility();
+function getAvailibility() {
+            //Find the availability slots for the Teacher and convert the timestamps to 
+            //readable times using momentJS. Then pass to the view and the booking widget
+            Bookings.findOne({ '_id':'58b3eae313ce5a2ce8099f01' }, function (err, booking) {
+            if (err) return handleError(err);
+           for (i=0; i<booking.availability.length; i++){
+                if(booking.availability[i].dow == 0){
+                    monAvailTime = monAvailTime+moment.utc(booking.availability[i].start).format("HH:mm")+' - '+moment.utc(booking.availability[i].end).format("HH:mm")+' <br>'}
+                else if(booking.availability[i].dow == 1){
+                    tueAvailTime = tueAvailTime+' '+moment.utc(booking.availability[i].start).format("HH:mm")+' - '+moment.utc(booking.availability[i].end).format("HH:mm")+' <br>'}
+                else if(booking.availability[i].dow == 2){
+                    wedAvailTime = wedAvailTime+' '+moment.utc(booking.availability[i].start).format("HH:mm")+' - '+moment.utc(booking.availability[i].end).format("HH:mm")+' <br>'}
+                else if(booking.availability[i].dow == 3){
+                    thuAvailTime = thuAvailTime+' '+moment.utc(booking.availability[i].start).format("HH:mm")+' - '+moment.utc(booking.availability[i].end).format("HH:mm")+' <br>'}
+                else if(booking.availability[i].dow == 4){
+                    friAvailTime = friAvailTime+' '+moment.utc(booking.availability[i].start).format("HH:mm")+' - '+moment.utc(booking.availability[i].end).format("HH:mm")+' <br>'}
+                else if(booking.availability[i].dow == 5){
+                    satAvailTime = satAvailTime+' '+moment.utc(booking.availability[i].start).format("HH:mm")+' - '+moment.utc(booking.availability[i].end).format("HH:mm")+' <br>'}
+                else if(booking.availability[i].dow == 6){
+                    sunAvailTime = sunAvailTime+' '+moment.utc(booking.availability[i].start).format("HH:mm")+' - '+moment.utc(booking.availability[i].end).format("HH:mm")+' <br>'}
+                           console.log('booking dow: '+booking.availability[i].dow)
+                           console.log('booking monAvailTime: '+monAvailTime)
+                           console.log('booking tueAvailTime: '+tueAvailTime)
+                           console.log('booking wedAvailTime: '+wedAvailTime)
+                           console.log('booking thuAvailTime: '+thuAvailTime)
+                           console.log('booking friAvailTime: '+friAvailTime)
+                           console.log('booking satAvailTime: '+satAvailTime)
+                           console.log('booking sunAvailTime: '+sunAvailTime)        
+                       } // end for loop
+
+
+res.render('profile.ejs', {
+            user : user, 
+            mon : monAvailTime,
+            tue : tueAvailTime,
+            wed : wedAvailTime,
+            thu : thuAvailTime,
+            fri : friAvailTime,
+            sat : satAvailTime,
+            sun : sunAvailTime
+}); //end res.render
+}) //end Bookings.findOne
+} //end getAvailibility
+}) // end findById 
+}) //end route
+
+
+
+    // User.findById(req.params._id, function(err, user) {
+    //         if (err) res.send(err);
+    //         console.log('findById function!!!')
+    //     });
+
+
+
+
+// app.get('/teacher-:_id', function(req, res, next) {
+//         console.log('Request for object _id from req.params._id which is: ' + req.params._id);
+//                     var isLoggedIn = res.locals.isLoggedIn
+//       User.findById(req.params._id, function(err, user) {
+//             if (err) res.send(err);
+//         res.render('profile.ejs', {
+//             user : user, 
+// })
+//         });
+
+// })
+
+
+
+
+
+
+
+
 
 
 //Routes for Email Mailing List

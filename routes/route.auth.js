@@ -377,23 +377,20 @@ nodemailerMailgun.sendMail({
     // =====================================
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
-
     app.get('/profile', isLoggedIn, function(req, res) {
             var isLoggedIn = res.locals.isLoggedIn
             var booking
             var monAvailTime = ''
-            var tueAvailTime = ' '
-            var wedAvailTime = ' '
-            var thuAvailTime = ' '
-            var friAvailTime = ' '
-            var satAvailTime = ' '
-            var sunAvailTime = ' '
-
-           isAvailable();
-           //notAvailable();
+            var tueAvailTime = ''
+            var wedAvailTime = ''
+            var thuAvailTime = ''
+            var friAvailTime = ''
+            var satAvailTime = ''
+            var sunAvailTime = ''
 
 
-function isAvailable() {
+           getAvailibility();
+function getAvailibility() {
             //Find the availability slots for the Teacher and convert the timestamps to 
             //readable times using momentJS. Then pass to the view and the booking widget
             Bookings.findOne({ '_id':req.user._id }, function (err, booking) {
@@ -413,8 +410,18 @@ function isAvailable() {
                     satAvailTime = satAvailTime+' '+moment.utc(booking.availability[i].start).format("HH:mm")+' - '+moment.utc(booking.availability[i].end).format("HH:mm")+' <br>'}
                 else if(booking.availability[i].dow == 6){
                     sunAvailTime = sunAvailTime+' '+moment.utc(booking.availability[i].start).format("HH:mm")+' - '+moment.utc(booking.availability[i].end).format("HH:mm")+' <br>'}
-                                    }
-        res.render('profile.ejs', {
+                           console.log('booking dow: '+booking.availability[i].dow)
+                           console.log('booking monAvailTime: '+monAvailTime)
+                           console.log('booking tueAvailTime: '+tueAvailTime)
+                           console.log('booking wedAvailTime: '+wedAvailTime)
+                           console.log('booking thuAvailTime: '+thuAvailTime)
+                           console.log('booking friAvailTime: '+friAvailTime)
+                           console.log('booking satAvailTime: '+satAvailTime)
+                           console.log('booking sunAvailTime: '+sunAvailTime)        
+                       } // end for loop
+
+
+res.render('profile.ejs', {
             user : req.user, 
             mon : monAvailTime,
             tue : tueAvailTime,
@@ -422,17 +429,14 @@ function isAvailable() {
             thu : thuAvailTime,
             fri : friAvailTime,
             sat : satAvailTime,
-            sun : sunAvailTime});
-})} 
+            sun : sunAvailTime
+}); //end res.render
+}) //end Bookings.findOne
+} //end getAvailibility 
+}) //end route
 
 
 
-
-
-
-
-
-})
 
     // =====================================
     // LOGOUT ==============================
