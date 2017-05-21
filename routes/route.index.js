@@ -223,7 +223,7 @@ console.log('req.params._id = '+req.params._id)
 function getAvailibility() {
             //Find the availability slots for the Teacher and convert the timestamps to 
             //readable times using momentJS. Then pass to the view and the booking widget
-            Bookings.findOne({ '_id':'58b3eae313ce5a2ce8099f01' }, function (err, booking) {
+            Bookings.findOne({ '_id':req.params._id }, function (err, booking) {
             if (err) return handleError(err);
            for (i=0; i<booking.availability.length; i++){
                 if(booking.availability[i].dow == 0){

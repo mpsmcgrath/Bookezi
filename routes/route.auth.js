@@ -461,8 +461,51 @@ res.render('profile.ejs', {
         });
     });
 
+    // =====================================
+    // DASHBOARD EDIT DETAILS===============
+    // =====================================
+    // we will want this protected so you have to be logged in to visit
+    // we will use route middleware to verify this (the isLoggedIn function)
+    app.get('/editdetails', isLoggedIn, function(req, res) {
+            var isLoggedIn = res.locals.isLoggedIn
+        res.render('editdetails.ejs', {
+            user : req.user, // get the user out of session and pass to template
+            message: req.flash('signupMessage'),
+            title: 'Edit Details'
+
+        });
+    });
 
 
+    // =====================================
+    // DASHBOARD PAYMENTS ===============
+    // =====================================
+    // we will want this protected so you have to be logged in to visit
+    // we will use route middleware to verify this (the isLoggedIn function)
+    app.get('/payments', isLoggedIn, function(req, res) {
+            var isLoggedIn = res.locals.isLoggedIn
+        res.render('payments.ejs', {
+            user : req.user, // get the user out of session and pass to template
+            message: req.flash('signupMessage'),
+            title: 'Payments'
+
+        });
+    });
+
+    // =====================================
+    // DASHBOARD SCHEDULE ===============
+    // =====================================
+    // we will want this protected so you have to be logged in to visit
+    // we will use route middleware to verify this (the isLoggedIn function)
+    app.get('/schedule', isLoggedIn, function(req, res) {
+            var isLoggedIn = res.locals.isLoggedIn
+        res.render('schedule.ejs', {
+            user : req.user, // get the user out of session and pass to template
+            message: req.flash('signupMessage'),
+            title: 'Schedule'
+
+        });
+    });
 
 
 
