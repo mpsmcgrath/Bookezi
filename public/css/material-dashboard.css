@@ -5083,3 +5083,8 @@ footer .btn {
     overflow: visible;
   }
 }
+.vspacer50 {min-height: 50px;}
+
+tbody {
+  background-color: white;
+}

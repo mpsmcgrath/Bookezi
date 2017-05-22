@@ -22,6 +22,8 @@ HTML modified from http://www.w3schools.com/bootstrap/bootstrap_navbar.asp and s
       <ul class="nav navbar-nav navbar-right">
         <% if (isLoggedIn) { %>
         <li><a href="/dashboard"><span class="glyphicon glyphicon-table"></span> Dashboard</a></li>
+                <li><a href="/profile"></span> View Profile</a></li>
+                <li><a href="/schedule"></span> View Schedule</a></li>
         <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     <% } else { %>
         <li><a href="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
@@ -37,7 +39,6 @@ HTML modified from http://www.w3schools.com/bootstrap/bootstrap_navbar.asp and s
             <li><a href="http://bookezi.wordpress.com">Blog</a></li>
           </ul>
         </li>
-        <li><a href="/howitworks">how it works</a></li>
       </ul>
     </div>
   </div>
