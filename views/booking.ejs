@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+  <head><% include partials/template/head.ejs %></head>
+<body class="profile-page" style="background-image: linear-gradient(to bottom, white 0%, grey 100%)">
+<% include partials/template/header.ejs %>
+
+
+    <div class="page-header-profile" data-parallax="active" ></div>
+
+    <div class="col-md-11 main main-raised">
+        <div class="profile-content">
+
+<p>You Selected the Teacher: <%= teacherId %></p>            
+<p>You Selected the Location: <%= locationRadios %></p>
+<div class="col-md-3"></div>
+            <div class="col-md-6">
+                <h4 class="card-title text-center">Please Select a time for your lesson</h4>
+                <div id='calendar'>
+                </div>
+            </div>
+            <div class="col-md-3">
+            	
+
+
+
+            <div class="col-md-3">
+                
+                    <div>
+                        <div class="content">
+                        <form action="/booking" method="POST">
+                       <div class="input-group">
+                            <h5 class="profile-widget-titles"><i class="fa fa-calendar btn btn-simple btn-just-icon btn-primary profile-widget-icons"></i> Availability</h5>
+
+
+                            <hr>
+                            
+                            <h5 class="profile-widget-titles"><i class="fa fa-globe btn btn-simple btn-just-icon btn-success profile-widget-icons"></i> Lesson Location</h5>
+                            
+                            <div class="radio">
+
+                                <label><input type="radio" name="locationRadios" value="0">At Teachers Home</label>
+                              </div> 
+                              <div class="radio">
+                                <label><input type="radio" name="locationRadios" value="1">At Students Home</label>
+                            </div>
+                            <div class="radio">
+                                <label><input type="radio" name="locationRadios" value="2">At Other Location</label>
+                            </div>
+
+                            <hr>
+                            <h5 class="profile-widget-titles"><i class="fa fa-euro btn btn-simple btn-just-icon btn-warning profile-widget-icons"></i> Price<br>from <b>€35</b> per hour</h5>
+                                        
+                                        
+
+                                        <div class="footer text-center">
+                                        <input type="submit" value="Book Lesson" class="btn btn-round btn-primary"></a>
+               
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+
+
+            </div><!-- end container profile -->
+
+
+
+
+
+            </div>
+            </div><!-- end container profile -->
+
+    </div>
+
+
+<div class="profile-footer">
+<% include partials/template/footer.ejs %>
+</div>
+<% include partials/template/jsdefaults.ejs %>    
+</body>
+</html>

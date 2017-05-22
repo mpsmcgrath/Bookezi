@@ -43,10 +43,10 @@
                         <div class="content">
                                 <h4>Stats</h4>
                                 <ul class="list-unstyled">
-                                    <li><b>60</b> Products</li>
-                                    <li><b>4</b> Collections</li>
-                                    <li><b>331</b> Influencers</li>
-                                    <li><b>1.2K</b> Likes</li>
+                                    <li><b>160</b> Lessons Completed</li>
+                                    <li><b>32</b> Happy Customers</li>
+                                    <li><b>120</b> Bookezi Hours of Teaching</li>
+                                    <li><b>26</b> Times Favourited by Students</li>
                                 </ul>
                         </div>
 
@@ -77,19 +77,19 @@
                                         <div class="item active">
                                             <img src="./img/examples/bg2.jpg" alt="Awesome Image">
                                             <div class="carousel-caption">
-                                                <h4><i class="material-icons">location_on</i> Yellowstone National Park, United States</h4>
+                                                <h4><i class="material-icons">location_on</i> Singing Lesson, At Students Home</h4>
                                             </div>
                                         </div>
                                         <div class="item">
                                             <img src="./img/examples/bg3.jpg" alt="Awesome Image">
                                             <div class="carousel-caption">
-                                                <h4><i class="material-icons">location_on</i> Somewhere Beyond, United States</h4>
+                                                <h4><i class="material-icons">location_on</i> Guitar Lesson, At Students Home</h4>
                                             </div>
                                         </div>
                                         <div class="item">
                                             <img src="./img/examples/bg.jpg" alt="Awesome Image">
                                             <div class="carousel-caption">
-                                                <h4><i class="material-icons">location_on</i> Yellowstone National Park, United States</h4>
+                                                <h4><i class="material-icons">location_on</i> Guitar Lesson, Dublin Music School</h4>
                                             </div>
                                         </div>
                                     </div>
@@ -124,8 +124,7 @@
                                             <small>· 7 minutes ago</small></h4>
                                             <h6 class="text-muted"></h6>
 
-                                            <p>Chance too good. God level bars. I'm so proud of @LifeOfDesiigner #1 song in the country. Panda! Don't be scared of the truth because we need to restart the human foundation in truth I stand with the most humility. We are so blessed!</p>
-                                            <p>All praises and blessings to the families of people who never gave up on dreams. Don't forget, You're Awesome!</p>
+                                            <p>Every week at my lessons is a new and positive experience. I appreciate my teacher's expertise greatly and feel lucky for the opportunity to continue learning from him.</p> <p>He is very professional and has a friendly, welcoming environment</p>
 
                                             <div class="media-footer">
                                             <hr>
@@ -149,8 +148,7 @@
                                             <small>· 7 minutes ago</small></h4>
                                             <h6 class="text-muted"></h6>
 
-                                            <p>Chance too good. God level bars. I'm so proud of @LifeOfDesiigner #1 song in the country. Panda! Don't be scared of the truth because we need to restart the human foundation in truth I stand with the most humility. We are so blessed!</p>
-                                            <p>All praises and blessings to the families of people who never gave up on dreams. Don't forget, You're Awesome!</p>
+                                            <p>My daughter has attended for introductory guitar classes for almost two years and really enjoys it. Her teacher is great, very calm, encouraging and patient, and he doesn't talk down to them. </p><p>Every week I see progress and her personal pride in playing a little more accurately and fluidly each time. The atmosphere in the building from all staff is one of professionalism, kindness and welcome.</p>
 
                                             <div class="media-footer">
                                             <hr>
@@ -171,8 +169,8 @@
                 
                     <div class="card booking-card">
                         <div class="content">
-                                               <div class="input-group">
-
+                        <form action="/booking" method="POST">
+                       <div class="input-group">
                             <h5 class="profile-widget-titles"><i class="fa fa-calendar btn btn-simple btn-just-icon btn-primary profile-widget-icons"></i> Availability</h5>
                             <div class="avail-box-dow dowmon"><p data-target="dow1">Mon </p></div>
                             <div class="avail-box-dow dowtue"><p data-target="dow2">Tues </p></div>
@@ -191,35 +189,32 @@
                                 <div id="dow7"><% if (sun == '') { %><p>No availability on Sundays</p><% } else{ %><p><%- sun %></p><% } %></div>
                             </div>
                             <hr>
+                            
                             <h5 class="profile-widget-titles"><i class="fa fa-globe btn btn-simple btn-just-icon btn-success profile-widget-icons"></i> Lesson Location</h5>
+                            
                             <div class="radio">
-                                <label>
-                                    <input type="radio" name="optionsRadios"><span class="circle"></span><span class="check"></span>
-                                    At Teachers home
-                                </label>
+
+                                <label><input type="radio" name="locationRadios" value="0">At Teachers Home</label>
+                              </div> 
+                              <div class="radio">
+                                <label><input type="radio" name="locationRadios" value="1">At Students Home</label>
                             </div>
                             <div class="radio">
-                                <label>
-                                    <input type="radio" name="optionsRadios"><span class="circle"></span><span class="check"></span>
-                                    At Students home
-                                </label>
+                                <label><input type="radio" name="locationRadios" value="2">At Other Location</label>
                             </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="optionsRadios"><span class="circle"></span><span class="check"></span>
-                                    At other location
-                                </label>
-                            </div>
-                    
+
+                                <input type="hidden" name="userId" value="<%= user._id %>">
                             <hr>
                             <h5 class="profile-widget-titles"><i class="fa fa-euro btn btn-simple btn-just-icon btn-warning profile-widget-icons"></i> Price<br>from <b>€35</b> per hour</h5>
                                         
                                         
 
                                         <div class="footer text-center">
-                                            <a href="#pablo" class="btn btn-round btn-primary">Book Lesson</a>
+                                        <input type="submit" value="Book Lesson" class="btn btn-round btn-primary"></a>
+                                          </form>
                                         </div>
                                     </div>
+                                </div>
                                 </div>
 
 

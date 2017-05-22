@@ -378,6 +378,7 @@ nodemailerMailgun.sendMail({
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
     app.get('/profile', isLoggedIn, function(req, res) {
+      teacherId = req.user._id
             var isLoggedIn = res.locals.isLoggedIn
             var booking
             var monAvailTime = ''
@@ -429,7 +430,8 @@ res.render('profile.ejs', {
             thu : thuAvailTime,
             fri : friAvailTime,
             sat : satAvailTime,
-            sun : sunAvailTime
+            sun : sunAvailTime,
+            teacherId : teacherId
 }); //end res.render
 }) //end Bookings.findOne
 } //end getAvailibility 
@@ -507,7 +509,21 @@ res.render('profile.ejs', {
         });
     });
 
-
+    // =====================================
+    // BOOKING PAGE ===============
+    // =====================================
+    // we will want this protected so you have to be logged in to visit
+    // we will use route middleware to verify this (the isLoggedIn function)
+app.post('/booking', function(req, res){
+  var location
+if(req.body.locationRadios=="0"){location = "At Teachers Home"}
+  if(req.body.locationRadios=="1"){location = "At Users Home"}
+    if(req.body.locationRadios=="2"){location = "At Custom Location"}
+res.render('booking.ejs',{
+    locationRadios: location,
+    teacherId : req.body.userId
+   })
+})
 
  // =============================================================================
  // AUTHENTICATE (FIRST LOGIN) ==================================================

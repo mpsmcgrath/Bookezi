@@ -7,6 +7,7 @@ var Schema = mongoose.Schema;
 // it's pretty self explanatory! I have used clear field names where I can. 
 // the local, facebook and google embedded lists are used by PassportJS auth module
 var UserSchema = new Schema({ 
+  _id: { type: Schema.ObjectId, auto: true },
   firstName: { type: String, lowercase: true, trim: true },
   lastName: { type: String, lowercase: true, trim: true },
   address1: { type: String, lowercase: true, trim: true },
