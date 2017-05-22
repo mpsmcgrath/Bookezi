@@ -1,6 +1,38 @@
 <!doctype html>
 <html>
-  <head><% include partials/template/head.ejs %></head>
+  <head>
+  	
+
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />    
+    <link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title>Bookezi - Music Lessons</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />    
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+
+    <!-- CSS Files -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/material-kit.css" rel="stylesheet"/>
+    <link href="css/style.css" rel="stylesheet"/>
+    <link rel='stylesheet' href='css/fullcalendar.css' />
+    <script src='js/jquery.min.js'></script>
+    <script src='js/moment.min.js'></script>
+    <script src='js/fullcalendar.js'></script>
+    <script src="js/fullcalendarjs/fullcalendar.options.booking.js"></script>
+
+
+
+
+
+  </head>
 <body class="profile-page" style="background-image: linear-gradient(to bottom, white 0%, grey 100%)">
 <% include partials/template/header.ejs %>
 
@@ -10,15 +42,18 @@
     <div class="col-md-11 main main-raised">
         <div class="profile-content">
 
-<p>You Selected the Teacher: <%= teacherId %></p>            
-<p>You Selected the Location: <%= locationRadios %></p>
+          
+<p></p>
 <div class="col-md-3"></div>
+
             <div class="col-md-6">
-                <h4 class="card-title text-center">Please Select a time for your lesson</h4>
+                <h4 class="card-title text-center"></h4>
                 <div id='calendar'>
                 </div>
+                <div class="vspacer20"></div>
+                 <div class="vspacer20"></div>
             </div>
-            <div class="col-md-3">
+      
             	
 
 
@@ -28,8 +63,9 @@
                     <div>
                         <div class="content">
                         <form action="/booking" method="POST">
-                       <div class="input-group">
+                      
                             <h5 class="profile-widget-titles"><i class="fa fa-calendar btn btn-simple btn-just-icon btn-primary profile-widget-icons"></i> Availability</h5>
+                            <h5>60min slots are available</h5> <h5>Book now before they are gone!</h5>
 
 
                             <hr>
@@ -38,28 +74,22 @@
                             
                             <div class="radio">
 
-                                <label><input type="radio" name="locationRadios" value="0">At Teachers Home</label>
-                              </div> 
-                              <div class="radio">
-                                <label><input type="radio" name="locationRadios" value="1">At Students Home</label>
-                            </div>
-                            <div class="radio">
-                                <label><input type="radio" name="locationRadios" value="2">At Other Location</label>
-                            </div>
+                                <label><input type="radio" name="locationRadios" checked="checked"><%= locationRadios %></label>
 
                             <hr>
-                            <h5 class="profile-widget-titles"><i class="fa fa-euro btn btn-simple btn-just-icon btn-warning profile-widget-icons"></i> Price<br>from <b>€35</b> per hour</h5>
+                            <h5 class="profile-widget-titles"><i class="fa fa-euro btn btn-simple btn-just-icon btn-warning profile-widget-icons"></i> Price<br> <b>€35</b> per hour</h5>
+                            <div class="vspacer20"></div>
+                            <div class="vspacer20"></div>
                                         
                                         
 
                                         <div class="footer text-center">
-                                        <input type="submit" value="Book Lesson" class="btn btn-round btn-primary"></a>
+                                        <input type="submit" value="Confirm Lesson" class="btn btn-round btn-warning"></a>
                
                                         </div>
                                     </div>
                                 </div>
-                                </div>
-
+                                
 
             </div><!-- end container profile -->
 
